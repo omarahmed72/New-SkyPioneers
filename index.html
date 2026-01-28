@@ -1,0 +1,844 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CASA TULANCINGO - A&L Arquitectos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Montserrat", sans-serif;
+        background-color: #0b0829;
+        color: white;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+      }
+
+      /* --- Hero Section --- */
+      .hero-section {
+        position: relative;
+        height: 90vh;
+        width: 100%;
+        background-color: #0b0829; /* لون احتياطي */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        overflow: hidden; /* لضمان عدم خروج الفيديو */
+      }
+
+      /* ستايل فيديو الخلفية للقسم الأول */
+      .hero-bg-video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
+        /* تقليل السطوع قليلاً لضمان وضوح العنوان */
+        filter: brightness(0.8) contrast(1.1);
+      }
+
+      /* تدرج لوني فوق الفيديو للدمج */
+      .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          rgba(11, 8, 41, 0.4) 0%,
+          rgba(11, 8, 41, 0.2) 50%,
+          #0b0829 100% /* تدرج للون الخلفية في الأسفل */
+        );
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      /* التأكد من أن المحتوى يظهر فوق الفيديو */
+      .hero-content-wrapper {
+        position: relative;
+        z-index: 10;
+      }
+
+      .top-nav {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 40px 50px 0;
+        z-index: 20;
+      }
+
+      .gold-line {
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          #c5a059 50%,
+          transparent 100%
+        );
+        margin-bottom: 15px;
+      }
+
+      .nav-links {
+        display: flex;
+        justify-content: center;
+        gap: 60px;
+        text-transform: uppercase;
+        font-size: 10px;
+        letter-spacing: 2px;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .main-title {
+        font-size: 90px;
+        font-weight: 600;
+        line-height: 0.9;
+        text-transform: uppercase;
+        margin-left: 10%;
+        margin-top: 15%;
+        letter-spacing: 2px;
+        text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      }
+
+      .side-number {
+        position: absolute;
+        right: 5%;
+        top: 50%;
+        transform: translateY(-50%);
+        text-align: right;
+        font-size: 14px;
+        font-weight: 300;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        z-index: 10;
+      }
+      .active-num {
+        font-size: 24px;
+        font-weight: 600;
+        position: relative;
+      }
+      .active-num::after {
+        content: "";
+        position: absolute;
+        right: -60px;
+        top: 50%;
+        width: 50px;
+        height: 1px;
+        background: white;
+      }
+
+      .bottom-info {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 10% 50px;
+        align-items: flex-end;
+        z-index: 10;
+        position: relative;
+      }
+
+      .info-block h3 {
+        font-size: 14px;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin-bottom: 5px;
+        letter-spacing: 1px;
+      }
+      .info-block p {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.5;
+        max-width: 250px;
+      }
+
+      .year-divider {
+        position: relative;
+        text-align: center;
+        margin: 40px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .year-divider::before,
+      .year-divider::after {
+        content: "";
+        height: 1px;
+        background: rgba(255, 255, 255, 0.2);
+        flex-grow: 1;
+        margin: 0 20px;
+      }
+      .year-text {
+        font-size: 14px;
+        letter-spacing: 2px;
+      }
+
+      /* --- Gallery Section --- */
+      .gallery-section {
+        padding: 40px 0;
+        text-align: center;
+        position: relative;
+        height: 700px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        perspective: 2000px;
+        background: linear-gradient(
+          to bottom,
+          #0b0829 0%,
+          #120e3d 50%,
+          #0b0829 100%
+        );
+      }
+
+      .gallery-title {
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 20px;
+        color: white;
+        z-index: 20;
+        position: relative;
+      }
+
+      .cylinder-track {
+        position: relative;
+        width: 300px;
+        height: 450px;
+        transform-style: preserve-3d;
+        transition: transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+        margin-top: 50px;
+      }
+
+      .glass-card {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 0px;
+        background: rgba(0, 255, 255, 0.02);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-top: 1px solid rgba(0, 255, 255, 0.3);
+        border-left: 1px solid rgba(0, 255, 255, 0.1);
+        border-right: 1px solid rgba(0, 255, 255, 0.1);
+        border-bottom: 1px solid rgba(0, 255, 255, 0.5);
+        box-shadow:
+          0 20px 40px rgba(0, 0, 0, 0.6),
+          inset 0 0 20px rgba(0, 255, 255, 0.05);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 25px;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        transition:
+          opacity 0.5s,
+          box-shadow 0.5s,
+          transform 0.5s,
+          border-color 0.5s;
+        cursor: pointer;
+        overflow: hidden;
+      }
+
+      .glass-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 255, 255, 0) 0%,
+          rgba(0, 255, 255, 0.1) 40%,
+          rgba(0, 255, 255, 0.6) 100%
+        );
+        z-index: -1;
+        pointer-events: none;
+        border-radius: 0px;
+      }
+
+      .glass-card::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 40%;
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 255, 255, 0.15),
+          transparent
+        );
+        z-index: -1;
+        pointer-events: none;
+        border-radius: 0px;
+      }
+
+      .card-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -2;
+        opacity: 0.7;
+        transition:
+          opacity 0.3s,
+          transform 0.5s;
+        filter: sepia(20%) hue-rotate(180deg) saturate(1.5);
+      }
+
+      .glass-card:hover .card-img,
+      .glass-card.active .card-img {
+        opacity: 1;
+        transform: scale(1.05);
+        filter: none;
+      }
+
+      .glass-card.active {
+        border-color: rgba(0, 255, 255, 0.8);
+        box-shadow: 0 0 50px rgba(0, 255, 255, 0.4);
+      }
+
+      .card-title {
+        font-size: 14px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+        color: #fff;
+      }
+
+      .cylinder-controls {
+        position: absolute;
+        bottom: 30px;
+        display: flex;
+        gap: 20px;
+        z-index: 50;
+      }
+
+      .control-btn {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .control-btn:hover {
+        background: white;
+        color: black;
+        transform: scale(1.1);
+      }
+
+      /* --- Concept Section (Page 3) with VIDEO --- */
+      .concept-section {
+        position: relative;
+        height: 100vh;
+        width: 100%;
+        background-color: #0b0829;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .concept-bg-video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
+        filter: brightness(0.7) contrast(1.1) grayscale(20%);
+      }
+
+      .concept-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          #0b0829 0%,
+          #0b0829 10%,
+          rgba(11, 8, 41, 0.6) 25%,
+          rgba(11, 8, 41, 0.1) 50%,
+          rgba(11, 8, 41, 0.6) 80%,
+          #0b0829 95%,
+          #0b0829 100%
+        );
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .blueprint-lines {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        pointer-events: none;
+        opacity: 0.5;
+      }
+
+      .tech-line {
+        position: absolute;
+        background-color: rgba(255, 255, 255, 0.5);
+        box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+      }
+
+      /* Sound Indicator Tooltip */
+      .sound-indicator {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 30px;
+        font-size: 12px;
+        z-index: 100;
+        pointer-events: none;
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 0.5s,
+          transform 0.5s;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      .sound-indicator.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Footer */
+      footer {
+        background-color: #0b0829;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 40px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 10px;
+        color: rgba(255, 255, 255, 0.6);
+        width: 90%;
+        margin: 0 auto;
+        position: relative;
+        z-index: 20;
+      }
+
+      .social-icons i {
+        margin: 0 10px;
+        cursor: pointer;
+        transition: color 0.3s;
+      }
+      .social-icons i:hover {
+        color: white;
+      }
+
+      @media (max-width: 768px) {
+        .main-title {
+          font-size: 40px;
+          margin-left: 5%;
+          margin-top: 30%;
+        }
+        .nav-links {
+          display: none;
+        }
+        .bottom-info {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 20px;
+        }
+        .side-number {
+          display: none;
+        }
+        .cylinder-track {
+          width: 240px;
+          height: 380px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sound Indicator -->
+    <div id="sound-hint" class="sound-indicator visible">
+      <i class="fas fa-volume-up mr-2"></i> اضغط في أي مكان لتفعيل الصوت
+    </div>
+
+    <!-- Hero Section with VIDEO -->
+    <header class="hero-section">
+      <!-- استبدال الصورة بالفيديو: لاحظ أننا نستخدم muted في البداية لتشغيل الفيديو بصرياً -->
+      <video
+        id="hero-video"
+        class="hero-bg-video"
+        autoplay
+        loop
+        muted
+        playsinline
+        poster="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2000&auto=format&fit=crop"
+      >
+        <!-- فيديو معماري لفيلا حديثة -->
+        <source
+          src="From KlickPin CF Pin on Quick Saves.mp4"
+          type="video/mp4"
+        />
+      </video>
+
+      <!-- طبقة التدرج اللوني للدمج -->
+      <div class="hero-overlay"></div>
+
+      <div class="top-nav">
+        <div class="nav-links">
+          <span>Architecture</span>
+          <span>Design</span>
+          <span>Concept</span>
+          <span>Planning</span>
+          <span>Interior Design</span>
+        </div>
+        <div class="gold-line" style="margin-top: 10px"></div>
+      </div>
+
+      <div class="hero-content-wrapper">
+        <h1 class="main-title">CASA<br />TULANCINGO</h1>
+      </div>
+
+      <div class="side-number">
+        <div style="opacity: 0.5">02</div>
+        <div class="active-num">03</div>
+        <div style="opacity: 0.5">04</div>
+      </div>
+
+      <div class="bottom-info">
+        <div class="info-block">
+          <h3>PLANTA BAJA</h3>
+          <p>
+            Vestíbulo, Estancia, Comedor,<br />Cocina, Alacena, Área de
+            lavado,<br />jardín.
+          </p>
+        </div>
+        <div class="info-block">
+          <h3>PLANTA ALTA</h3>
+          <p>3 recamaras, Baño compartido,<br />Sala de TV, Terraza.</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- Divider -->
+    <div class="year-divider">
+      <span class="year-text">2022</span>
+    </div>
+
+    <!-- Gallery Section (Cylinder) -->
+    <section class="gallery-section">
+      <h2 class="gallery-title">BY A&L ARQUITECTOS</h2>
+
+      <div class="cylinder-track" id="cylinder-track">
+        <!-- Items injected via JS -->
+      </div>
+
+      <div class="cylinder-controls">
+        <div class="control-btn" onclick="rotateCylinder(1)">
+          <i class="fas fa-chevron-left"></i>
+        </div>
+        <div class="control-btn" onclick="rotateCylinder(-1)">
+          <i class="fas fa-chevron-right"></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- Concept Section (Page 3) with VIDEO -->
+    <section class="concept-section">
+      <video
+        id="concept-video"
+        class="concept-bg-video"
+        autoplay
+        loop
+        muted
+        playsinline
+        poster="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=2000&auto=format&fit=crop"
+      >
+        <source
+          src="From KlickPin CF Пин от пользователя Parallel Dimensions Lab на доске Facades _ Архитектурные макеты Архитектурные модели Архитектура фасадов.mp4"
+          type="video/mp4"
+        />
+      </video>
+
+      <div class="concept-overlay"></div>
+
+      <div class="blueprint-lines">
+        <div
+          class="tech-line"
+          style="width: 1px; height: 100%; left: 20%; top: 0; opacity: 0.3"
+        ></div>
+        <div
+          class="tech-line"
+          style="width: 1px; height: 100%; left: 80%; top: 0; opacity: 0.3"
+        ></div>
+        <div
+          class="tech-line"
+          style="width: 1px; height: 60%; left: 50%; top: 20%; opacity: 0.5"
+        ></div>
+        <div
+          class="tech-line"
+          style="width: 100%; height: 1px; left: 0; top: 30%; opacity: 0.2"
+        ></div>
+        <div
+          class="tech-line"
+          style="width: 100%; height: 1px; left: 0; top: 70%; opacity: 0.2"
+        ></div>
+
+        <div
+          style="
+            position: absolute;
+            left: 50%;
+            top: 40%;
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+          "
+        ></div>
+        <div
+          class="tech-line"
+          style="width: 50px; height: 1px; left: 50%; top: 40.5%"
+        ></div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div>7711296084</div>
+      <div class="text-center">
+        <div style="margin-bottom: 5px">www.alarquitectos.com</div>
+        <div class="social-icons">
+          <i class="fab fa-facebook-f"></i>
+          <i class="fab fa-twitter"></i>
+          <i class="fab fa-instagram"></i>
+          <i class="fab fa-pinterest-p"></i>
+          <i class="fab fa-youtube"></i>
+        </div>
+      </div>
+      <div>7715322845</div>
+    </footer>
+
+    <script>
+      const galleryItems = [
+        {
+          img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=800&auto=format&fit=crop",
+          title: "Vista aerea",
+        },
+        {
+          img: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=800&auto=format&fit=crop",
+          title: "Vestibulo",
+        },
+        {
+          img: "https://images.unsplash.com/photo-1600596542815-6ad4c7213aa5?q=80&w=800&auto=format&fit=crop",
+          title: "Perspectiva Posterior",
+        },
+        {
+          img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800&auto=format&fit=crop",
+          title: "Perspectiva Izquierda",
+        },
+        {
+          img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=800&auto=format&fit=crop",
+          title: "Vista Nocturna",
+        },
+        {
+          img: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=800&auto=format&fit=crop",
+          title: "Interior Principal",
+        },
+        {
+          img: "https://images.unsplash.com/photo-1600596542815-6ad4c7213aa5?q=80&w=800&auto=format&fit=crop",
+          title: "Detalle Fachada",
+        },
+        {
+          img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800&auto=format&fit=crop",
+          title: "Entrada Principal",
+        },
+        {
+          img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop",
+          title: "Sala de Estar",
+        },
+        {
+          img: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=800&auto=format&fit=crop",
+          title: "Jardin Interior",
+        },
+      ];
+
+      const track = document.getElementById("cylinder-track");
+      let selectedIndex = 0;
+      const cellCount = galleryItems.length;
+      const cellWidth = 300;
+      const gap = 30;
+      const radius = Math.round(
+        (cellWidth + gap) / (2 * Math.tan(Math.PI / cellCount)),
+      );
+      const theta = 360 / cellCount;
+
+      function initGallery() {
+        galleryItems.forEach((item, i) => {
+          const card = document.createElement("div");
+          card.className = "glass-card";
+          const angle = theta * i;
+          card.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
+
+          card.innerHTML = `
+                    <img src="${item.img}" class="card-img" alt="${item.title}">
+                    <div class="relative z-10 w-full">
+                        <div class="card-title">${item.title}</div>
+                        <!-- تم تغيير لون الخط الفاصل الصغير إلى السيان أيضاً -->
+                        <div style="width: 30px; height: 2px; background: #00ffff; box-shadow: 0 0 5px #00ffff;"></div>
+                    </div>
+                `;
+
+          card.onclick = () => {
+            const currentMod =
+              ((selectedIndex % cellCount) + cellCount) % cellCount;
+            let diff = i - currentMod;
+            if (diff > cellCount / 2) diff -= cellCount;
+            if (diff < -cellCount / 2) diff += cellCount;
+            rotateCylinder(diff);
+          };
+
+          track.appendChild(card);
+        });
+        updateCylinder();
+      }
+
+      function rotateCylinder(direction) {
+        selectedIndex += direction;
+        updateCylinder();
+      }
+
+      function updateCylinder() {
+        const angle = theta * selectedIndex * -1;
+        track.style.transform = `translateZ(${-radius}px) rotateY(${angle}deg)`;
+
+        const cards = document.querySelectorAll(".glass-card");
+        const activeIndex =
+          ((selectedIndex % cellCount) + cellCount) % cellCount;
+
+        cards.forEach((card, i) => {
+          if (i === activeIndex) {
+            card.classList.add("active");
+            card.style.opacity = "1";
+          } else {
+            card.classList.remove("active");
+            card.style.opacity = "0.5";
+          }
+        });
+      }
+
+      initGallery();
+
+      let startX = 0;
+      const section = document.querySelector(".gallery-section");
+      section.addEventListener(
+        "touchstart",
+        (e) => (startX = e.changedTouches[0].screenX),
+      );
+      section.addEventListener("touchend", (e) => {
+        const endX = e.changedTouches[0].screenX;
+        if (endX < startX - 50) rotateCylinder(1);
+        if (endX > startX + 50) rotateCylinder(-1);
+      });
+
+      // -----------------------------------------------------
+      // منطق الصوت المتلاشي (Scroll Fading Audio Logic)
+      // -----------------------------------------------------
+
+      const videos = document.querySelectorAll("video");
+      let soundEnabled = false;
+
+      function handleScrollSound() {
+        if (!soundEnabled) return;
+
+        const windowHeight = window.innerHeight;
+        const center = windowHeight / 2;
+
+        videos.forEach((video) => {
+          const rect = video.getBoundingClientRect();
+          const videoCenter = rect.top + rect.height / 2;
+
+          // المسافة بين مركز الفيديو ومركز الشاشة
+          const distance = Math.abs(center - videoCenter);
+
+          // كلما زادت المسافة، قل الصوت
+          // الصوت يصبح 0 عندما تكون المسافة أكبر من 80% من ارتفاع الشاشة
+          const threshold = windowHeight * 0.8;
+
+          let vol = 1 - distance / threshold;
+
+          // التأكد من أن القيمة بين 0 و 1
+          if (vol < 0) vol = 0;
+          if (vol > 1) vol = 1;
+
+          // تطبيق الصوت مع نعومة بسيطة
+          video.volume = vol;
+
+          // إيقاف الفيديو إذا كان الصوت 0 تماماً لتوفير الموارد
+          // (اختياري، لكن هنا سنبقيه يعمل للتدفق السلس)
+        });
+      }
+
+      function enableAudio() {
+        if (soundEnabled) return;
+        soundEnabled = true;
+
+        // تفعيل الصوت لجميع الفيديوهات
+        videos.forEach((v) => {
+          v.muted = false; // إلغاء كتم الصوت
+          v.volume = 0; // البدء بصوت 0 لتجنب الإزعاج المفاجئ
+        });
+
+        // إخفاء التلميح
+        const hint = document.getElementById("sound-hint");
+        if (hint) {
+          hint.classList.remove("visible");
+          setTimeout(() => hint.remove(), 1000);
+        }
+
+        // حساب الصوت الأولي
+        handleScrollSound();
+
+        // إزالة مستمع النقر
+        document.removeEventListener("click", enableAudio);
+        document.removeEventListener("touchstart", enableAudio);
+      }
+
+      // إضافة مستمعات الأحداث
+      document.addEventListener("click", enableAudio);
+      document.addEventListener("touchstart", enableAudio); // للموبايل
+      window.addEventListener("scroll", handleScrollSound);
+      window.addEventListener("resize", handleScrollSound);
+    </script>
+  </body>
+</html>
