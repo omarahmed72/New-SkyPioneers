@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CASA TULANCINGO - A&L Arquitectos</title>
+    <title>SKYPIONEERS - Real Estate</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
     <link
@@ -14,28 +14,185 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <style>
+      /* --- CSS Variables for Theme Switching --- */
+      :root {
+        /* Light Mode (Default) */
+        --bg-color: #ffffff;
+        --text-color: #1a1a1a;
+        --text-muted: #555555;
+        --nav-bg: rgba(255, 255, 255, 0.4);
+        --nav-border: rgba(255, 255, 255, 0.6);
+        --nav-text: #1a1a1a;
+        --card-bg: rgba(255, 255, 255, 0.1);
+        --card-border: rgba(0, 0, 0, 0.05);
+        --overlay-grad-start: rgba(255, 255, 255, 0.2);
+        --overlay-grad-mid: rgba(255, 255, 255, 0.1);
+        --overlay-grad-end: #ffffff;
+        --accent-gold: #c5a059;
+        --gallery-bg: linear-gradient(
+          to bottom,
+          #ffffff 0%,
+          #f4f4f4 50%,
+          #ffffff 100%
+        );
+        --blueprint-color: rgba(0, 0, 0, 0.4);
+        --blueprint-opacity: 0.15;
+        --glass-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        --video-filter: brightness(0.95) contrast(1.05);
+      }
+
+      [data-theme="dark"] {
+        /* Dark Mode (#0b0829) */
+        --bg-color: #0b0829;
+        --text-color: #ffffff;
+        --text-muted: rgba(255, 255, 255, 0.7);
+        --nav-bg: rgba(11, 8, 41, 0.4);
+        --nav-border: rgba(255, 255, 255, 0.1);
+        --nav-text: #ffffff;
+        --card-bg: rgba(0, 255, 255, 0.02);
+        --card-border: rgba(0, 255, 255, 0.2);
+        --overlay-grad-start: rgba(11, 8, 41, 0.4);
+        --overlay-grad-mid: rgba(11, 8, 41, 0.2);
+        --overlay-grad-end: #0b0829;
+        --accent-gold: #c5a059;
+        --gallery-bg: linear-gradient(
+          to bottom,
+          #0b0829 0%,
+          #120e3d 50%,
+          #0b0829 100%
+        );
+        --blueprint-color: rgba(255, 255, 255, 0.5);
+        --blueprint-opacity: 0.3;
+        --glass-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        --video-filter: brightness(0.8) contrast(1.1);
+      }
+
       body {
         font-family: "Montserrat", sans-serif;
-        background-color: #0b0829;
-        color: white;
+        background-color: var(--bg-color);
+        color: var(--text-color);
         margin: 0;
         padding: 0;
         overflow-x: hidden;
+        transition:
+          background-color 0.5s ease,
+          color 0.5s ease;
+      }
+
+      /* --- 3D Liquid Glass Navbar --- */
+      .liquid-nav-container {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        max-width: 1200px;
+        z-index: 100;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 40px;
+
+        /* The 3D Liquid Glass Effect */
+        background: var(--nav-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 50px;
+        border: 1px solid var(--nav-border);
+        box-shadow:
+          0 10px 30px rgba(0, 0, 0, 0.1),
+          inset 0 0 20px rgba(255, 255, 255, 0.2),
+          inset 0 0 5px rgba(255, 255, 255, 0.5); /* Inner shine */
+
+        transition: all 0.5s ease;
+      }
+
+      .liquid-nav-container:hover {
+        box-shadow:
+          0 15px 40px rgba(0, 0, 0, 0.15),
+          inset 0 0 30px rgba(255, 255, 255, 0.3);
+        transform: translateX(-50%) translateY(-2px);
+      }
+
+      .nav-logo {
+        font-weight: 800;
+        font-size: 18px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        /* Gradient Text */
+        background: linear-gradient(
+          135deg,
+          var(--text-color) 0%,
+          var(--accent-gold) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 40px;
+        align-items: center;
+      }
+
+      .nav-link {
+        text-decoration: none;
+        color: var(--nav-text);
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        position: relative;
+        transition: color 0.3s;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--accent-gold);
+        transition: width 0.3s;
+      }
+
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      /* Toggle Button */
+      .theme-toggle {
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid var(--nav-border);
+        color: var(--nav-text);
+        transition: all 0.3s;
+      }
+      .theme-toggle:hover {
+        background: var(--accent-gold);
+        color: white;
+        border-color: var(--accent-gold);
       }
 
       /* --- Hero Section --- */
       .hero-section {
         position: relative;
-        height: 90vh;
+        height: 100vh;
         width: 100%;
-        background-color: #0b0829; /* لون احتياطي */
+        background-color: var(--bg-color);
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
-        overflow: hidden; /* لضمان عدم خروج الفيديو */
+        justify-content: center;
+        overflow: hidden;
       }
 
-      /* ستايل فيديو الخلفية للقسم الأول */
       .hero-bg-video {
         position: absolute;
         top: 0;
@@ -44,11 +201,10 @@
         height: 100%;
         object-fit: cover;
         z-index: 0;
-        /* تقليل السطوع قليلاً لضمان وضوح العنوان */
-        filter: brightness(0.8) contrast(1.1);
+        filter: var(--video-filter);
+        transition: filter 0.5s ease;
       }
 
-      /* تدرج لوني فوق الفيديو للدمج */
       .hero-overlay {
         position: absolute;
         top: 0;
@@ -57,62 +213,95 @@
         height: 100%;
         background: linear-gradient(
           to bottom,
-          rgba(11, 8, 41, 0.4) 0%,
-          rgba(11, 8, 41, 0.2) 50%,
-          #0b0829 100% /* تدرج للون الخلفية في الأسفل */
+          var(--overlay-grad-start) 0%,
+          var(--overlay-grad-mid) 50%,
+          var(--overlay-grad-end) 100%
         );
         z-index: 1;
         pointer-events: none;
+        transition: background 0.5s ease;
       }
 
-      /* التأكد من أن المحتوى يظهر فوق الفيديو */
+      /* --- New Title Animation --- */
       .hero-content-wrapper {
         position: relative;
         z-index: 10;
-      }
-
-      .top-nav {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        padding: 40px 50px 0;
-        z-index: 20;
-      }
-
-      .gold-line {
-        width: 100%;
-        height: 1px;
-        background: linear-gradient(
-          90deg,
-          transparent 0%,
-          #c5a059 50%,
-          transparent 100%
-        );
-        margin-bottom: 15px;
-      }
-
-      .nav-links {
-        display: flex;
-        justify-content: center;
-        gap: 60px;
-        text-transform: uppercase;
-        font-size: 10px;
-        letter-spacing: 2px;
-        color: rgba(255, 255, 255, 0.8);
+        padding-left: 10%;
+        padding-right: 5%;
       }
 
       .main-title {
-        font-size: 90px;
-        font-weight: 600;
-        line-height: 0.9;
+        font-size: 80px;
+        font-weight: 900; /* Extra Bold */
+        line-height: 1;
         text-transform: uppercase;
-        margin-left: 10%;
-        margin-top: 15%;
-        letter-spacing: 2px;
-        text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        letter-spacing: -2px;
+        color: var(--text-color); /* Adapts to theme */
+        text-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        transition: color 0.5s ease;
       }
 
+      .title-line {
+        display: block;
+        overflow: hidden;
+        margin-bottom: 5px;
+      }
+
+      .title-word {
+        display: inline-block;
+        transform: translateY(120%);
+        opacity: 0;
+        animation: revealText 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        background: linear-gradient(
+          90deg,
+          var(--text-color),
+          #888,
+          var(--text-color)
+        );
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation-name: revealText, shineText;
+        animation-duration: 1s, 5s;
+        animation-fill-mode: forwards, infinite;
+      }
+
+      /* Staggered delays */
+      .delay-1 {
+        animation-delay: 0.2s, 0s;
+      }
+      .delay-2 {
+        animation-delay: 0.4s, 0s;
+      }
+      .delay-3 {
+        font-size: 40px;
+        font-weight: 400;
+        letter-spacing: 5px;
+        animation-delay: 0.6s, 0s;
+        margin-top: 10px;
+        -webkit-text-fill-color: var(--text-muted);
+      }
+
+      @keyframes revealText {
+        0% {
+          transform: translateY(120%) rotateX(20deg);
+          opacity: 0;
+        }
+        100% {
+          transform: translateY(0) rotateX(0deg);
+          opacity: 1;
+        }
+      }
+
+      @keyframes shineText {
+        to {
+          background-position: 200% center;
+        }
+      }
+
+      /* --- Bottom Info & Side --- */
       .side-number {
         position: absolute;
         right: 5%;
@@ -123,8 +312,10 @@
         font-weight: 300;
         display: flex;
         flex-direction: column;
-        gap: 5px;
+        gap: 10px;
         z-index: 10;
+        color: var(--text-color);
+        transition: color 0.5s;
       }
       .active-num {
         font-size: 24px;
@@ -137,33 +328,40 @@
         right: -60px;
         top: 50%;
         width: 50px;
-        height: 1px;
-        background: white;
+        height: 2px;
+        background: var(--accent-gold);
       }
 
       .bottom-info {
+        position: absolute;
+        bottom: 40px;
+        left: 0;
+        width: 100%;
         display: flex;
         justify-content: space-between;
-        padding: 0 10% 50px;
+        padding: 0 10%;
         align-items: flex-end;
         z-index: 10;
-        position: relative;
       }
 
       .info-block h3 {
-        font-size: 14px;
-        font-weight: 600;
+        font-size: 12px;
+        font-weight: 700;
         text-transform: uppercase;
         margin-bottom: 5px;
-        letter-spacing: 1px;
+        letter-spacing: 2px;
+        color: var(--text-color);
+        transition: color 0.5s;
       }
       .info-block p {
-        font-size: 12px;
-        color: rgba(255, 255, 255, 0.7);
-        line-height: 1.5;
+        font-size: 11px;
+        color: var(--text-muted);
+        line-height: 1.6;
         max-width: 250px;
+        transition: color 0.5s;
       }
 
+      /* --- Divider --- */
       .year-divider {
         position: relative;
         text-align: center;
@@ -171,48 +369,49 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        background-color: var(--bg-color);
+        transition: background 0.5s;
       }
       .year-divider::before,
       .year-divider::after {
         content: "";
         height: 1px;
-        background: rgba(255, 255, 255, 0.2);
+        background: var(--text-muted);
+        opacity: 0.2;
         flex-grow: 1;
         margin: 0 20px;
       }
       .year-text {
         font-size: 14px;
         letter-spacing: 2px;
+        color: var(--text-muted);
       }
 
       /* --- Gallery Section --- */
       .gallery-section {
-        padding: 40px 0;
+        padding: 60px 0;
         text-align: center;
         position: relative;
-        height: 700px;
+        height: 800px;
         overflow: hidden;
         display: flex;
         flex-direction: column;
         align-items: center;
         perspective: 2000px;
-        background: linear-gradient(
-          to bottom,
-          #0b0829 0%,
-          #120e3d 50%,
-          #0b0829 100%
-        );
+        background: var(--gallery-bg);
+        transition: background 0.5s ease;
       }
 
       .gallery-title {
-        font-size: 20px;
-        font-weight: 400;
+        font-size: 24px;
+        font-weight: 300;
         text-transform: uppercase;
-        letter-spacing: 3px;
-        margin-bottom: 20px;
-        color: white;
+        letter-spacing: 5px;
+        margin-bottom: 40px;
+        color: var(--text-color);
         z-index: 20;
         position: relative;
+        transition: color 0.5s;
       }
 
       .cylinder-track {
@@ -230,17 +429,12 @@
         left: 0;
         width: 100%;
         height: 100%;
-        border-radius: 0px;
-        background: rgba(0, 255, 255, 0.02);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border-top: 1px solid rgba(0, 255, 255, 0.3);
-        border-left: 1px solid rgba(0, 255, 255, 0.1);
-        border-right: 1px solid rgba(0, 255, 255, 0.1);
-        border-bottom: 1px solid rgba(0, 255, 255, 0.5);
-        box-shadow:
-          0 20px 40px rgba(0, 0, 0, 0.6),
-          inset 0 0 20px rgba(0, 255, 255, 0.05);
+        border-radius: 4px; /* Slight roundness for elegance, or 0 for sharp */
+        background: var(--card-bg);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid var(--card-border);
+        box-shadow: var(--glass-shadow);
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
@@ -256,41 +450,6 @@
         overflow: hidden;
       }
 
-      .glass-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(
-          to bottom,
-          rgba(0, 255, 255, 0) 0%,
-          rgba(0, 255, 255, 0.1) 40%,
-          rgba(0, 255, 255, 0.6) 100%
-        );
-        z-index: -1;
-        pointer-events: none;
-        border-radius: 0px;
-      }
-
-      .glass-card::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 40%;
-        background: linear-gradient(
-          to bottom,
-          rgba(0, 255, 255, 0.15),
-          transparent
-        );
-        z-index: -1;
-        pointer-events: none;
-        border-radius: 0px;
-      }
-
       .card-img {
         position: absolute;
         top: 0;
@@ -299,23 +458,21 @@
         height: 100%;
         object-fit: cover;
         z-index: -2;
-        opacity: 0.7;
+        opacity: 0.8;
         transition:
           opacity 0.3s,
           transform 0.5s;
-        filter: sepia(20%) hue-rotate(180deg) saturate(1.5);
+        filter: var(--video-filter);
       }
 
       .glass-card:hover .card-img,
       .glass-card.active .card-img {
         opacity: 1;
         transform: scale(1.05);
-        filter: none;
       }
-
       .glass-card.active {
-        border-color: rgba(0, 255, 255, 0.8);
-        box-shadow: 0 0 50px rgba(0, 255, 255, 0.4);
+        border-color: var(--accent-gold);
+        box-shadow: 0 0 40px rgba(197, 160, 89, 0.2);
       }
 
       .card-title {
@@ -324,13 +481,13 @@
         text-transform: uppercase;
         letter-spacing: 1px;
         margin-bottom: 8px;
-        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
-        color: #fff;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+        color: white;
       }
 
       .cylinder-controls {
         position: absolute;
-        bottom: 30px;
+        bottom: 50px;
         display: flex;
         gap: 20px;
         z-index: 50;
@@ -340,32 +497,34 @@
         width: 50px;
         height: 50px;
         border-radius: 50%;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        background: rgba(0, 0, 0, 0.5);
-        color: white;
+        border: 1px solid var(--nav-border);
+        background: var(--nav-bg);
+        backdrop-filter: blur(10px);
+        color: var(--text-color);
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
         transition: all 0.3s;
       }
-
       .control-btn:hover {
-        background: white;
-        color: black;
+        background: var(--accent-gold);
+        color: white;
+        border-color: var(--accent-gold);
         transform: scale(1.1);
       }
 
-      /* --- Concept Section (Page 3) with VIDEO --- */
+      /* --- Concept Section --- */
       .concept-section {
         position: relative;
         height: 100vh;
         width: 100%;
-        background-color: #0b0829;
+        background-color: var(--bg-color);
         display: flex;
         align-items: center;
         justify-content: center;
         overflow: hidden;
+        transition: background-color 0.5s;
       }
 
       .concept-bg-video {
@@ -376,7 +535,7 @@
         height: 100%;
         object-fit: cover;
         z-index: 0;
-        filter: brightness(0.7) contrast(1.1) grayscale(20%);
+        filter: var(--video-filter);
       }
 
       .concept-overlay {
@@ -387,16 +546,13 @@
         height: 100%;
         background: linear-gradient(
           to bottom,
-          #0b0829 0%,
-          #0b0829 10%,
-          rgba(11, 8, 41, 0.6) 25%,
-          rgba(11, 8, 41, 0.1) 50%,
-          rgba(11, 8, 41, 0.6) 80%,
-          #0b0829 95%,
-          #0b0829 100%
+          var(--bg-color) 0%,
+          rgba(0, 0, 0, 0) 50%,
+          var(--bg-color) 100%
         );
         z-index: 1;
         pointer-events: none;
+        transition: background 0.5s;
       }
 
       .blueprint-lines {
@@ -405,24 +561,26 @@
         height: 100%;
         z-index: 2;
         pointer-events: none;
-        opacity: 0.5;
+        opacity: 1;
       }
 
       .tech-line {
         position: absolute;
-        background-color: rgba(255, 255, 255, 0.5);
-        box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+        background-color: var(--blueprint-color);
+        opacity: var(--blueprint-opacity);
       }
 
       /* Sound Indicator Tooltip */
       .sound-indicator {
         position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background: rgba(0, 0, 0, 0.6);
-        color: white;
-        padding: 10px 20px;
-        border-radius: 30px;
+        bottom: 30px;
+        right: 30px;
+        background: var(--nav-bg);
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--nav-border);
+        color: var(--text-color);
+        padding: 12px 25px;
+        border-radius: 50px;
         font-size: 12px;
         z-index: 100;
         pointer-events: none;
@@ -430,8 +588,10 @@
         transform: translateY(20px);
         transition:
           opacity 0.5s,
-          transform 0.5s;
-        border: 1px solid rgba(255, 255, 255, 0.2);
+          transform 0.5s,
+          background 0.5s,
+          color 0.5s;
+        font-weight: 600;
       }
       .sound-indicator.visible {
         opacity: 1;
@@ -440,49 +600,57 @@
 
       /* Footer */
       footer {
-        background-color: #0b0829;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        background-color: var(--bg-color);
+        border-top: 1px solid var(--card-border);
         padding: 40px 0;
         display: flex;
         justify-content: space-between;
         align-items: center;
         font-size: 10px;
-        color: rgba(255, 255, 255, 0.6);
+        color: var(--text-muted);
         width: 90%;
         margin: 0 auto;
         position: relative;
         z-index: 20;
+        transition:
+          background-color 0.5s,
+          border-color 0.5s,
+          color 0.5s;
       }
 
       .social-icons i {
         margin: 0 10px;
         cursor: pointer;
         transition: color 0.3s;
+        color: var(--text-muted);
       }
       .social-icons i:hover {
-        color: white;
+        color: var(--text-color);
       }
 
       @media (max-width: 768px) {
         .main-title {
-          font-size: 40px;
-          margin-left: 5%;
-          margin-top: 30%;
+          font-size: 45px;
         }
         .nav-links {
           display: none;
+        }
+        .liquid-nav-container {
+          padding: 10px 20px;
         }
         .bottom-info {
           flex-direction: column;
           align-items: flex-start;
           gap: 20px;
+          position: relative;
+          padding-bottom: 20px;
         }
         .side-number {
           display: none;
         }
         .cylinder-track {
-          width: 240px;
-          height: 380px;
+          width: 260px;
+          height: 400px;
         }
       }
     </style>
@@ -490,12 +658,26 @@
   <body>
     <!-- Sound Indicator -->
     <div id="sound-hint" class="sound-indicator visible">
-      <i class="fas fa-volume-up mr-2"></i> اضغط في أي مكان لتفعيل الصوت
+      <i class="fas fa-volume-up mr-2"></i> Tap anywhere for sound
     </div>
 
-    <!-- Hero Section with VIDEO -->
+    <!-- 3D Liquid Glass Navbar -->
+    <nav class="liquid-nav-container">
+      <div class="nav-logo">SkyPioneers</div>
+      <div class="nav-links hidden md:flex">
+        <a href="#" class="nav-link">Home</a>
+        <a href="#" class="nav-link">Projects</a>
+        <a href="#" class="nav-link">About</a>
+        <a href="#" class="nav-link">Contact</a>
+      </div>
+      <!-- Theme Toggle Button -->
+      <button class="theme-toggle" onclick="toggleTheme()" title="Switch Theme">
+        <i class="fas fa-moon" id="theme-icon"></i>
+      </button>
+    </nav>
+
+    <!-- Hero Section -->
     <header class="hero-section">
-      <!-- استبدال الصورة بالفيديو: لاحظ أننا نستخدم muted في البداية لتشغيل الفيديو بصرياً -->
       <video
         id="hero-video"
         class="hero-bg-video"
@@ -505,29 +687,25 @@
         playsinline
         poster="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2000&auto=format&fit=crop"
       >
-        <!-- فيديو معماري لفيلا حديثة -->
         <source
           src="From KlickPin CF Pin on Quick Saves.mp4"
           type="video/mp4"
         />
       </video>
 
-      <!-- طبقة التدرج اللوني للدمج -->
       <div class="hero-overlay"></div>
 
-      <div class="top-nav">
-        <div class="nav-links">
-          <span>Architecture</span>
-          <span>Design</span>
-          <span>Concept</span>
-          <span>Planning</span>
-          <span>Interior Design</span>
-        </div>
-        <div class="gold-line" style="margin-top: 10px"></div>
-      </div>
-
+      <!-- Animated Title -->
       <div class="hero-content-wrapper">
-        <h1 class="main-title">CASA<br />TULANCINGO</h1>
+        <h1 class="main-title">
+          <span class="title-line">
+            <span class="title-word delay-1">SKY</span>
+            <span class="title-word delay-2">PIONEERS</span>
+          </span>
+          <span class="title-line">
+            <span class="title-word delay-3">REAL ESTATE</span>
+          </span>
+        </h1>
       </div>
 
       <div class="side-number">
@@ -538,27 +716,30 @@
 
       <div class="bottom-info">
         <div class="info-block">
-          <h3>PLANTA BAJA</h3>
+          <h3>PREMIUM SPACES</h3>
           <p>
-            Vestíbulo, Estancia, Comedor,<br />Cocina, Alacena, Área de
-            lavado,<br />jardín.
+            Luxury residential complexes,<br />commercial hubs, and bespoke<br />architectural
+            marvels.
           </p>
         </div>
         <div class="info-block">
-          <h3>PLANTA ALTA</h3>
-          <p>3 recamaras, Baño compartido,<br />Sala de TV, Terraza.</p>
+          <h3>VISION</h3>
+          <p>
+            Redefining skylines with<br />sustainable innovation and<br />timeless
+            elegance.
+          </p>
         </div>
       </div>
     </header>
 
     <!-- Divider -->
     <div class="year-divider">
-      <span class="year-text">2022</span>
+      <span class="year-text">EST. 2024</span>
     </div>
 
     <!-- Gallery Section (Cylinder) -->
     <section class="gallery-section">
-      <h2 class="gallery-title">BY A&L ARQUITECTOS</h2>
+      <h2 class="gallery-title">PORTFOLIO</h2>
 
       <div class="cylinder-track" id="cylinder-track">
         <!-- Items injected via JS -->
@@ -574,7 +755,7 @@
       </div>
     </section>
 
-    <!-- Concept Section (Page 3) with VIDEO -->
+    <!-- Concept Section -->
     <section class="concept-section">
       <video
         id="concept-video"
@@ -596,23 +777,23 @@
       <div class="blueprint-lines">
         <div
           class="tech-line"
-          style="width: 1px; height: 100%; left: 20%; top: 0; opacity: 0.3"
+          style="width: 1px; height: 100%; left: 20%; top: 0"
         ></div>
         <div
           class="tech-line"
-          style="width: 1px; height: 100%; left: 80%; top: 0; opacity: 0.3"
+          style="width: 1px; height: 100%; left: 80%; top: 0"
         ></div>
         <div
           class="tech-line"
-          style="width: 1px; height: 60%; left: 50%; top: 20%; opacity: 0.5"
+          style="width: 1px; height: 60%; left: 50%; top: 20%"
         ></div>
         <div
           class="tech-line"
-          style="width: 100%; height: 1px; left: 0; top: 30%; opacity: 0.2"
+          style="width: 100%; height: 1px; left: 0; top: 30%"
         ></div>
         <div
           class="tech-line"
-          style="width: 100%; height: 1px; left: 0; top: 70%; opacity: 0.2"
+          style="width: 100%; height: 1px; left: 0; top: 70%"
         ></div>
 
         <div
@@ -622,7 +803,7 @@
             top: 40%;
             width: 6px;
             height: 6px;
-            background: white;
+            background: var(--accent-gold);
             border-radius: 50%;
           "
         ></div>
@@ -635,61 +816,78 @@
 
     <!-- Footer -->
     <footer>
-      <div>7711296084</div>
+      <div>+1 (555) 123-4567</div>
       <div class="text-center">
-        <div style="margin-bottom: 5px">www.alarquitectos.com</div>
+        <div style="margin-bottom: 5px">www.skypioneers.com</div>
         <div class="social-icons">
           <i class="fab fa-facebook-f"></i>
           <i class="fab fa-twitter"></i>
           <i class="fab fa-instagram"></i>
-          <i class="fab fa-pinterest-p"></i>
-          <i class="fab fa-youtube"></i>
+          <i class="fab fa-linkedin-in"></i>
         </div>
       </div>
-      <div>7715322845</div>
+      <div>New York, NY</div>
     </footer>
 
     <script>
+      // --- Theme Switching Logic ---
+      let isDarkMode = false;
+      const themeIcon = document.getElementById("theme-icon");
+
+      function toggleTheme() {
+        isDarkMode = !isDarkMode;
+        if (isDarkMode) {
+          document.body.setAttribute("data-theme", "dark");
+          themeIcon.classList.remove("fa-moon");
+          themeIcon.classList.add("fa-sun");
+        } else {
+          document.body.removeAttribute("data-theme");
+          themeIcon.classList.remove("fa-sun");
+          themeIcon.classList.add("fa-moon");
+        }
+      }
+
+      // --- Gallery Logic ---
       const galleryItems = [
         {
           img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=800&auto=format&fit=crop",
-          title: "Vista aerea",
+          title: "Aerial View",
         },
         {
           img: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=800&auto=format&fit=crop",
-          title: "Vestibulo",
+          title: "Grand Lobby",
         },
         {
           img: "https://images.unsplash.com/photo-1600596542815-6ad4c7213aa5?q=80&w=800&auto=format&fit=crop",
-          title: "Perspectiva Posterior",
+          title: "Rear Facade",
         },
         {
           img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800&auto=format&fit=crop",
-          title: "Perspectiva Izquierda",
+          title: "Left Wing",
         },
         {
           img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=800&auto=format&fit=crop",
-          title: "Vista Nocturna",
+          title: "Night Mode",
         },
         {
           img: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=800&auto=format&fit=crop",
-          title: "Interior Principal",
+          title: "Main Hall",
         },
         {
           img: "https://images.unsplash.com/photo-1600596542815-6ad4c7213aa5?q=80&w=800&auto=format&fit=crop",
-          title: "Detalle Fachada",
+          title: "Detailing",
         },
         {
           img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800&auto=format&fit=crop",
-          title: "Entrada Principal",
+          title: "Entrance",
         },
         {
           img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop",
-          title: "Sala de Estar",
+          title: "Living Space",
         },
         {
           img: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=800&auto=format&fit=crop",
-          title: "Jardin Interior",
+          title: "Garden",
         },
       ];
 
@@ -714,8 +912,7 @@
                     <img src="${item.img}" class="card-img" alt="${item.title}">
                     <div class="relative z-10 w-full">
                         <div class="card-title">${item.title}</div>
-                        <!-- تم تغيير لون الخط الفاصل الصغير إلى السيان أيضاً -->
-                        <div style="width: 30px; height: 2px; background: #00ffff; box-shadow: 0 0 5px #00ffff;"></div>
+                        <div style="width: 30px; height: 2px; background: var(--accent-gold); box-shadow: 0 0 5px rgba(197, 160, 89, 0.5);"></div>
                     </div>
                 `;
 
@@ -771,10 +968,7 @@
         if (endX > startX + 50) rotateCylinder(-1);
       });
 
-      // -----------------------------------------------------
-      // منطق الصوت المتلاشي (Scroll Fading Audio Logic)
-      // -----------------------------------------------------
-
+      // --- Audio Logic ---
       const videos = document.querySelectorAll("video");
       let soundEnabled = false;
 
@@ -787,25 +981,15 @@
         videos.forEach((video) => {
           const rect = video.getBoundingClientRect();
           const videoCenter = rect.top + rect.height / 2;
-
-          // المسافة بين مركز الفيديو ومركز الشاشة
           const distance = Math.abs(center - videoCenter);
-
-          // كلما زادت المسافة، قل الصوت
-          // الصوت يصبح 0 عندما تكون المسافة أكبر من 80% من ارتفاع الشاشة
           const threshold = windowHeight * 0.8;
 
           let vol = 1 - distance / threshold;
 
-          // التأكد من أن القيمة بين 0 و 1
           if (vol < 0) vol = 0;
           if (vol > 1) vol = 1;
 
-          // تطبيق الصوت مع نعومة بسيطة
           video.volume = vol;
-
-          // إيقاف الفيديو إذا كان الصوت 0 تماماً لتوفير الموارد
-          // (اختياري، لكن هنا سنبقيه يعمل للتدفق السلس)
         });
       }
 
@@ -813,30 +997,25 @@
         if (soundEnabled) return;
         soundEnabled = true;
 
-        // تفعيل الصوت لجميع الفيديوهات
         videos.forEach((v) => {
-          v.muted = false; // إلغاء كتم الصوت
-          v.volume = 0; // البدء بصوت 0 لتجنب الإزعاج المفاجئ
+          v.muted = false;
+          v.volume = 0;
         });
 
-        // إخفاء التلميح
         const hint = document.getElementById("sound-hint");
         if (hint) {
           hint.classList.remove("visible");
           setTimeout(() => hint.remove(), 1000);
         }
 
-        // حساب الصوت الأولي
         handleScrollSound();
 
-        // إزالة مستمع النقر
         document.removeEventListener("click", enableAudio);
         document.removeEventListener("touchstart", enableAudio);
       }
 
-      // إضافة مستمعات الأحداث
       document.addEventListener("click", enableAudio);
-      document.addEventListener("touchstart", enableAudio); // للموبايل
+      document.addEventListener("touchstart", enableAudio);
       window.addEventListener("scroll", handleScrollSound);
       window.addEventListener("resize", handleScrollSound);
     </script>
