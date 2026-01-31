@@ -16,7 +16,7 @@
     <style>
       /* --- CSS Variables --- */
       :root {
-        /* Light Mode (White/Clean) */
+        /* Light Mode */
         --bg-color: #ffffff;
         --text-color: #171a20;
         --text-muted: #5c5e62;
@@ -24,14 +24,14 @@
         --nav-border: rgba(255, 255, 255, 0.5);
         --mega-menu-bg: rgba(255, 255, 255, 0.9);
 
-        /* Card Variables (Light Mode) */
-        --card-bg: rgba(255, 255, 255, 0.15);
+        /* Card Variables */
+        --card-bg: rgba(255, 255, 255, 0.3);
         --card-border: rgba(255, 255, 255, 0.6);
-        --card-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-        --card-gradient: linear-gradient(
+        --card-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+        --card-inner-gradient: linear-gradient(
           to top,
-          rgba(255, 255, 255, 0.95) 0%,
-          rgba(255, 255, 255, 0.6) 30%,
+          rgba(255, 255, 255, 0.9) 0%,
+          rgba(255, 255, 255, 0.4) 60%,
           rgba(255, 255, 255, 0) 100%
         );
 
@@ -60,16 +60,28 @@
           #ffffff 100%
         );
 
+        /* Explore Specifics */
+        --sidebar-gradient: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.7) 0%,
+          rgba(255, 255, 255, 0.3) 100%
+        );
+        --explore-hero-blend: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.1) 0%,
+          rgba(255, 255, 255, 0) 20%,
+          #ffffff 95%,
+          #ffffff 100%
+        );
+
         --video-filter: brightness(1.05) contrast(1.02);
         --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
 
-        /* About Section Specifics */
-        --about-overlay: rgba(255, 255, 255, 0.8);
         --stat-border: rgba(0, 0, 0, 0.1);
       }
 
       [data-theme="dark"] {
-        /* Dark Mode (Deep Blue/Liquid Night) */
+        /* Dark Mode */
         --bg-color: #0b0829;
         --text-color: #ffffff;
         --text-muted: rgba(255, 255, 255, 0.7);
@@ -77,14 +89,14 @@
         --nav-border: rgba(255, 255, 255, 0.1);
         --mega-menu-bg: rgba(11, 8, 41, 0.95);
 
-        /* Card Variables (Dark Mode) */
-        --card-bg: rgba(11, 8, 41, 0.3);
-        --card-border: rgba(255, 255, 255, 0.1);
+        /* Card Variables */
+        --card-bg: rgba(11, 8, 41, 0.5);
+        --card-border: rgba(255, 255, 255, 0.15);
         --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
-        --card-gradient: linear-gradient(
+        --card-inner-gradient: linear-gradient(
           to top,
           #0b0829 0%,
-          rgba(11, 8, 41, 0.8) 40%,
+          rgba(11, 8, 41, 0.8) 60%,
           rgba(11, 8, 41, 0) 100%
         );
 
@@ -113,13 +125,25 @@
           #0b0829 100%
         );
 
+        /* Explore Specifics */
+        --sidebar-gradient: linear-gradient(
+          135deg,
+          rgba(20, 20, 50, 0.8) 0%,
+          rgba(11, 8, 41, 0.5) 100%
+        );
+        --explore-hero-blend: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.3) 0%,
+          rgba(11, 8, 41, 0) 20%,
+          #0b0829 95%,
+          #0b0829 100%
+        );
+
         --blueprint-color: rgba(255, 255, 255, 0.5);
         --blueprint-opacity: 0.3;
         --glass-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
         --video-filter: brightness(0.8) contrast(1.1);
-        --dropdown-bg: rgba(11, 8, 41, 0.9);
 
-        --about-overlay: rgba(11, 8, 41, 0.6);
         --stat-border: rgba(255, 255, 255, 0.1);
       }
 
@@ -494,7 +518,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        perspective: 3000px; /* Enhanced depth for wider cylinder */
+        perspective: 3000px;
         background: var(--gallery-bg);
         transition: background 0.5s ease;
       }
@@ -550,7 +574,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: var(--card-gradient);
+        background: var(--card-inner-gradient); /* Use card specific gradient */
         z-index: -1;
         pointer-events: none;
         transition: background 0.5s ease;
@@ -675,7 +699,7 @@
         opacity: var(--blueprint-opacity);
       }
 
-      /* --- About Section (Video Background) --- */
+      /* --- About Section --- */
       .about-section-container {
         position: relative;
         width: 100%;
@@ -687,7 +711,6 @@
         position: relative;
         height: 90vh;
         width: 100%;
-        /* Replaced Image with Video Container Styles */
         display: flex;
         align-items: center;
         justify-content: center;
@@ -904,6 +927,264 @@
         margin-bottom: 40px;
       }
 
+      /* --- Explore Page Styles (Updated for Full Video Background) --- */
+      .explore-full-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .explore-video-bg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: var(--video-filter);
+      }
+
+      .explore-video-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(
+          --explore-hero-blend
+        ); /* Use blended gradient for overlay */
+        z-index: 1;
+      }
+
+      .explore-content-wrapper {
+        position: relative;
+        z-index: 2;
+        padding-top: 120px;
+        min-height: 100vh;
+      }
+
+      .explore-title {
+        font-size: 60px;
+        font-weight: 300;
+        text-transform: uppercase;
+        letter-spacing: 5px;
+        color: #ffffff;
+        text-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .explore-container {
+        display: flex;
+        max-width: 1600px;
+        margin: 0 auto;
+        padding: 0 20px 40px;
+        gap: 30px;
+      }
+
+      /* Sidebar Liquid Glass */
+      .sidebar {
+        flex: 0 0 300px;
+        padding: 30px;
+        background: var(--sidebar-gradient);
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        border-radius: 12px;
+        border: 1px solid var(--card-border);
+        box-shadow: var(--glass-shadow);
+        height: fit-content;
+        position: sticky;
+        top: 80px;
+        transition: background 0.5s;
+      }
+
+      .filter-group {
+        margin-bottom: 25px;
+      }
+      .filter-title {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--text-color);
+        margin-bottom: 12px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .checkbox-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+        font-size: 13px;
+        color: var(--text-color);
+        cursor: pointer;
+        transition: color 0.2s;
+        font-weight: 500;
+      }
+      .checkbox-item:hover {
+        color: var(--accent-gold);
+      }
+      .checkbox-item input {
+        margin-right: 10px;
+        accent-color: var(--accent-gold);
+      }
+
+      .room-selector {
+        display: flex;
+        gap: 10px;
+      }
+      .room-btn {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 1px solid var(--nav-border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        color: var(--text-color);
+        cursor: pointer;
+        transition: all 0.3s;
+        background: rgba(255, 255, 255, 0.2);
+      }
+      .room-btn:hover,
+      .room-btn.active {
+        background: var(--accent-gold);
+        color: white;
+        border-color: var(--accent-gold);
+      }
+
+      .price-range input {
+        width: 100%;
+        accent-color: var(--accent-gold);
+      }
+
+      /* Property Grid */
+      .property-grid {
+        flex: 1;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 25px;
+      }
+
+      .property-card {
+        background: var(--card-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--card-border);
+        border-radius: 12px;
+        overflow: hidden;
+        transition:
+          transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+          box-shadow 0.4s;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .property-card::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 70%;
+        background: var(--card-inner-gradient);
+        z-index: 1;
+        pointer-events: none;
+        transition: background 0.5s ease;
+      }
+
+      .property-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--glass-shadow);
+        border-color: var(--accent-gold);
+      }
+
+      .prop-img-container {
+        height: 220px;
+        overflow: hidden;
+        position: relative;
+        z-index: 0;
+      }
+      .prop-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+      }
+      .property-card:hover .prop-img {
+        transform: scale(1.1);
+      }
+
+      .prop-details {
+        padding: 20px;
+        position: relative;
+        z-index: 2;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+      .prop-tag {
+        font-size: 10px;
+        color: var(--accent-gold);
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 5px;
+      }
+      .prop-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--text-color);
+        margin-bottom: 5px;
+      }
+      .prop-price {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--accent-gold);
+        margin-bottom: 10px;
+      }
+      .prop-specs {
+        display: flex;
+        gap: 15px;
+        font-size: 12px;
+        color: var(--text-color);
+        border-top: 1px solid rgba(128, 128, 128, 0.2);
+        padding-top: 10px;
+        margin-top: auto;
+      }
+      .prop-specs span i {
+        margin-right: 5px;
+      }
+
+      .pagination {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin: 50px 0;
+      }
+      .page-btn {
+        width: 40px;
+        height: 40px;
+        border: 1px solid var(--nav-border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-color);
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s;
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(5px);
+      }
+      .page-btn:hover,
+      .page-btn.active {
+        background: var(--accent-gold);
+        color: white;
+        border-color: var(--accent-gold);
+      }
+
       /* Sound Indicator */
       .sound-indicator {
         position: fixed;
@@ -976,6 +1257,15 @@
         .about-main-title {
           font-size: 40px;
         }
+        .explore-container {
+          flex-direction: column;
+        }
+        .sidebar {
+          width: 100%;
+          position: relative;
+          top: 0;
+          z-index: 10;
+        }
       }
       @media (max-width: 640px) {
         .about-grid {
@@ -996,6 +1286,9 @@
       <div class="nav-center hidden lg:flex">
         <!-- Home Link -->
         <div class="nav-item" onclick="switchPage('home')">Home</div>
+
+        <!-- Explore Link -->
+        <div class="nav-item" onclick="switchPage('explore')">Explore</div>
 
         <div class="nav-item has-menu">
           Projects
@@ -1174,10 +1467,284 @@
       </section>
     </div>
 
+    <!-- EXPLORE PAGE VIEW WRAPPER -->
+    <div id="explore-page" class="page-section hidden">
+      <!-- Full Page Background Video for Explore -->
+      <div class="explore-full-bg">
+        <video class="explore-video-bg" autoplay loop muted playsinline>
+          <source
+            src="From KlickPin CF Pin on Quick Saves.mp4"
+            type="video/mp4"
+          />
+        </video>
+        <div class="explore-video-overlay"></div>
+      </div>
+
+      <!-- Main Content Wrapper -->
+      <div class="explore-content-wrapper">
+        <h1 class="explore-title">Explore</h1>
+
+        <div class="explore-container">
+          <!-- Sidebar with Glass Gradient -->
+          <aside class="sidebar">
+            <div class="filter-group">
+              <h4 class="filter-title">Filters</h4>
+              <input
+                type="text"
+                placeholder="Search..."
+                class="w-full p-2 rounded bg-white/20 text-sm mb-4 border border-white/30 text-current placeholder-gray-500 focus:outline-none focus:border-yellow-500 transition-colors"
+              />
+            </div>
+
+            <div class="filter-group">
+              <h4 class="filter-title">Unit Types</h4>
+              <label class="checkbox-item"
+                ><input type="checkbox" /> Apartment</label
+              >
+              <label class="checkbox-item"
+                ><input type="checkbox" /> Duplex</label
+              >
+              <label class="checkbox-item"
+                ><input type="checkbox" /> Penthouse</label
+              >
+              <label class="checkbox-item"
+                ><input type="checkbox" /> Villa</label
+              >
+              <label class="checkbox-item"
+                ><input type="checkbox" /> Townhouse</label
+              >
+              <label class="checkbox-item"
+                ><input type="checkbox" /> Chalet</label
+              >
+            </div>
+
+            <div class="filter-group">
+              <h4 class="filter-title">Number of rooms</h4>
+              <div class="room-selector">
+                <div class="room-btn">1</div>
+                <div class="room-btn active">2</div>
+                <div class="room-btn">3</div>
+                <div class="room-btn">4+</div>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <h4 class="filter-title">Price Range</h4>
+              <input type="range" class="w-full price-range" />
+              <div
+                class="flex justify-between text-xs mt-2 text-current opacity-70"
+              >
+                <span>1M EGP</span><span>50M+ EGP</span>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <h4 class="filter-title">Locations</h4>
+              <label class="checkbox-item"
+                ><input type="checkbox" /> New Cairo</label
+              >
+              <label class="checkbox-item"
+                ><input type="checkbox" /> North Coast</label
+              >
+              <label class="checkbox-item"
+                ><input type="checkbox" /> Sheikh Zayed City</label
+              >
+              <label class="checkbox-item"
+                ><input type="checkbox" /> New Capital</label
+              >
+              <label class="checkbox-item"
+                ><input type="checkbox" /> Ras Sedr</label
+              >
+              <label class="checkbox-item"
+                ><input type="checkbox" /> El Mokattam</label
+              >
+              <label class="checkbox-item"
+                ><input type="checkbox" /> 6th of October</label
+              >
+              <label class="checkbox-item"
+                ><input type="checkbox" /> Al Maadi</label
+              >
+            </div>
+
+            <div class="filter-group">
+              <h4 class="filter-title">Projects</h4>
+              <label class="checkbox-item"
+                ><input type="checkbox" /> Talda</label
+              >
+              <label class="checkbox-item"
+                ><input type="checkbox" /> Sarai</label
+              >
+              <label class="checkbox-item"
+                ><input type="checkbox" /> Plage</label
+              >
+              <label class="checkbox-item"
+                ><input type="checkbox" /> Latin City</label
+              >
+              <label class="checkbox-item"
+                ><input type="checkbox" /> Badya</label
+              >
+              <label class="checkbox-item"
+                ><input type="checkbox" /> Zed Towers</label
+              >
+            </div>
+
+            <div class="filter-group">
+              <h4 class="filter-title">Developers</h4>
+              <label class="checkbox-item"
+                ><input type="checkbox" /> Mountain View</label
+              >
+              <label class="checkbox-item"
+                ><input type="checkbox" /> Palm Hills</label
+              >
+              <label class="checkbox-item"
+                ><input type="checkbox" /> MNHD</label
+              >
+              <label class="checkbox-item"
+                ><input type="checkbox" /> SODIC</label
+              >
+              <label class="checkbox-item"
+                ><input type="checkbox" /> City Edge</label
+              >
+              <label class="checkbox-item"
+                ><input type="checkbox" /> Orascom</label
+              >
+            </div>
+          </aside>
+
+          <!-- Property Grid -->
+          <div class="flex-1">
+            <div class="property-grid">
+              <!-- Property Card 1 -->
+              <div class="property-card">
+                <div class="prop-img-container">
+                  <img
+                    src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80"
+                    class="prop-img"
+                  />
+                </div>
+                <div class="prop-details">
+                  <div class="prop-tag">NEW CAIRO</div>
+                  <h3 class="prop-title">Sarai Apartment</h3>
+                  <div class="prop-price">7,375,464 EGP</div>
+                  <div class="prop-specs">
+                    <span><i class="fas fa-bed"></i> 2</span>
+                    <span><i class="fas fa-ruler-combined"></i> 113m²</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Property Card 2 -->
+              <div class="property-card">
+                <div class="prop-img-container">
+                  <img
+                    src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80"
+                    class="prop-img"
+                  />
+                </div>
+                <div class="prop-details">
+                  <div class="prop-tag">NORTH COAST</div>
+                  <h3 class="prop-title">Plage Chalet</h3>
+                  <div class="prop-price">17,980,000 EGP</div>
+                  <div class="prop-specs">
+                    <span><i class="fas fa-bed"></i> 3</span>
+                    <span><i class="fas fa-ruler-combined"></i> 155m²</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Property Card 3 -->
+              <div class="property-card">
+                <div class="prop-img-container">
+                  <img
+                    src="https://images.unsplash.com/photo-1600596542815-6ad4c7213aa5?w=800&q=80"
+                    class="prop-img"
+                  />
+                </div>
+                <div class="prop-details">
+                  <div class="prop-tag">SHEIKH ZAYED</div>
+                  <h3 class="prop-title">Zed Towers Duplex</h3>
+                  <div class="prop-price">25,500,000 EGP</div>
+                  <div class="prop-specs">
+                    <span><i class="fas fa-bed"></i> 4</span>
+                    <span><i class="fas fa-ruler-combined"></i> 240m²</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Property Card 4 -->
+              <div class="property-card">
+                <div class="prop-img-container">
+                  <img
+                    src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80"
+                    class="prop-img"
+                  />
+                </div>
+                <div class="prop-details">
+                  <div class="prop-tag">NEW CAIRO</div>
+                  <h3 class="prop-title">Mountain View iCity</h3>
+                  <div class="prop-price">14,200,000 EGP</div>
+                  <div class="prop-specs">
+                    <span><i class="fas fa-bed"></i> 3</span>
+                    <span><i class="fas fa-ruler-combined"></i> 180m²</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Property Card 5 -->
+              <div class="property-card">
+                <div class="prop-img-container">
+                  <img
+                    src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80"
+                    class="prop-img"
+                  />
+                </div>
+                <div class="prop-details">
+                  <div class="prop-tag">NEW CAPITAL</div>
+                  <h3 class="prop-title">Celia Apartment</h3>
+                  <div class="prop-price">9,500,000 EGP</div>
+                  <div class="prop-specs">
+                    <span><i class="fas fa-bed"></i> 3</span>
+                    <span><i class="fas fa-ruler-combined"></i> 145m²</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Property Card 6 -->
+              <div class="property-card">
+                <div class="prop-img-container">
+                  <img
+                    src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&q=80"
+                    class="prop-img"
+                  />
+                </div>
+                <div class="prop-details">
+                  <div class="prop-tag">EL MOKATTAM</div>
+                  <h3 class="prop-title">Uptown Cairo Villa</h3>
+                  <div class="prop-price">45,000,000 EGP</div>
+                  <div class="prop-specs">
+                    <span><i class="fas fa-bed"></i> 5</span>
+                    <span><i class="fas fa-ruler-combined"></i> 450m²</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+              <div class="page-btn"><i class="fas fa-chevron-left"></i></div>
+              <div class="page-btn active">1</div>
+              <div class="page-btn">2</div>
+              <div class="page-btn">3</div>
+              <div class="page-btn"><i class="fas fa-chevron-right"></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- ABOUT PAGE VIEW WRAPPER -->
     <div id="about-page" class="page-section hidden">
       <section class="about-section-container">
-        <!-- About Hero with VIDEO -->
         <div class="about-hero">
           <video
             id="about-video"
@@ -1188,7 +1755,7 @@
             playsinline
           >
             <source
-              src="From KlickPin CF Pin on Quick Saves.mp4"
+              src="From KlickPin CF Пин от пользователя Parallel Dimensions Lab на доске Facades _ Архитектурные макеты Архитектурные модели Архитектура фасадов.mp4"
               type="video/mp4"
             />
           </video>
@@ -1212,7 +1779,6 @@
           </div>
         </div>
 
-        <!-- Glass Cards Grid -->
         <div class="about-grid-wrapper">
           <div class="about-grid">
             <div class="feature-card">
@@ -1265,7 +1831,6 @@
           </div>
         </div>
 
-        <!-- Stats Row -->
         <div class="stats-row" id="stats-section">
           <div class="stat-item">
             <h3>Architects</h3>
@@ -1293,7 +1858,6 @@
           </div>
         </div>
 
-        <!-- Split Section 1 -->
         <div class="split-section">
           <div class="split-text">
             <span class="split-tag">About Us</span>
@@ -1321,7 +1885,6 @@
           </div>
         </div>
 
-        <!-- Split Section 2 -->
         <div class="split-section" style="flex-direction: row-reverse">
           <div class="split-text" style="background-color: var(--card-bg)">
             <span class="split-tag">Our Advantages</span>
@@ -1363,19 +1926,19 @@
     <script>
       // --- Page Switching Logic ---
       function switchPage(pageId) {
-        const homePage = document.getElementById("home-page");
-        const aboutPage = document.getElementById("about-page");
+        const pages = ["home-page", "about-page", "explore-page"];
 
         // Scroll to top
         window.scrollTo({ top: 0, behavior: "smooth" });
 
-        if (pageId === "home") {
-          aboutPage.classList.add("hidden");
-          homePage.classList.remove("hidden");
-        } else if (pageId === "about") {
-          homePage.classList.add("hidden");
-          aboutPage.classList.remove("hidden");
-        }
+        pages.forEach((id) => {
+          const el = document.getElementById(id);
+          if (id === pageId + "-page") {
+            el.classList.remove("hidden");
+          } else {
+            el.classList.add("hidden");
+          }
+        });
       }
 
       // --- Navbar Hide on Scroll ---
@@ -1421,7 +1984,7 @@
         });
       }
 
-      // --- Expanded Gallery (20 Items) ---
+      // --- Gallery Logic (Cylinder) ---
       const baseItems = [
         {
           img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=800&auto=format&fit=crop",
@@ -1478,6 +2041,7 @@
       const theta = 360 / cellCount;
 
       function initGallery() {
+        if (!track) return;
         galleryItems.forEach((item, i) => {
           const card = document.createElement("div");
           card.className = "glass-card";
@@ -1510,6 +2074,7 @@
       }
 
       function updateCylinder() {
+        if (!track) return;
         const angle = theta * selectedIndex * -1;
         track.style.transform = `translateZ(${-radius}px) rotateY(${angle}deg)`;
         const cards = document.querySelectorAll(".glass-card");
@@ -1528,17 +2093,19 @@
 
       initGallery();
 
-      let startX = 0;
       const section = document.querySelector(".gallery-section");
-      section.addEventListener(
-        "touchstart",
-        (e) => (startX = e.changedTouches[0].screenX),
-      );
-      section.addEventListener("touchend", (e) => {
-        const endX = e.changedTouches[0].screenX;
-        if (endX < startX - 50) rotateCylinder(1);
-        if (endX > startX + 50) rotateCylinder(-1);
-      });
+      if (section) {
+        let startX = 0;
+        section.addEventListener(
+          "touchstart",
+          (e) => (startX = e.changedTouches[0].screenX),
+        );
+        section.addEventListener("touchend", (e) => {
+          const endX = e.changedTouches[0].screenX;
+          if (endX < startX - 50) rotateCylinder(1);
+          if (endX > startX + 50) rotateCylinder(-1);
+        });
+      }
 
       // --- Audio Logic ---
       function enableAudio() {
@@ -1558,10 +2125,10 @@
 
       // --- Stats Counter Animation ---
       const statsSection = document.getElementById("stats-section");
-      const counters = document.querySelectorAll(".counter");
       let hasCounted = false;
 
       const startCounters = () => {
+        const counters = document.querySelectorAll(".counter");
         const speed = 50;
 
         counters.forEach((counter) => {
