@@ -23,12 +23,21 @@
         --nav-bg: rgba(255, 255, 255, 0.65);
         --nav-border: rgba(255, 255, 255, 0.5);
         --mega-menu-bg: rgba(255, 255, 255, 0.9);
-        --card-bg: rgba(255, 255, 255, 0.1);
-        --card-border: rgba(0, 0, 0, 0.05);
+
+        /* Card Variables (Light Mode) */
+        --card-bg: rgba(255, 255, 255, 0.15);
+        --card-border: rgba(255, 255, 255, 0.6);
+        --card-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        --card-gradient: linear-gradient(
+          to top,
+          rgba(255, 255, 255, 0.95) 0%,
+          rgba(255, 255, 255, 0.6) 30%,
+          rgba(255, 255, 255, 0) 100%
+        );
+
         --accent-gold: #c5a059;
 
-        /* Gradients for Light Mode - Seamless flow */
-        /* Hero: Fade from transparent top to solid white bottom */
+        /* Page Gradients */
         --hero-gradient: linear-gradient(
           to bottom,
           rgba(255, 255, 255, 0.2) 0%,
@@ -36,14 +45,12 @@
           rgba(255, 255, 255, 0.8) 85%,
           #ffffff 100%
         );
-        /* Gallery: White -> Soft Grey/Blue tint -> White */
         --gallery-bg: linear-gradient(
           to bottom,
           #ffffff 0%,
           #f0f4f8 50%,
           #ffffff 100%
         );
-        /* Concept: White -> Transparent -> White */
         --concept-gradient: linear-gradient(
           to bottom,
           #ffffff 0%,
@@ -55,6 +62,10 @@
 
         --video-filter: brightness(1.05) contrast(1.02);
         --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+
+        /* About Section Specifics */
+        --about-overlay: rgba(255, 255, 255, 0.8);
+        --stat-border: rgba(0, 0, 0, 0.1);
       }
 
       [data-theme="dark"] {
@@ -65,12 +76,21 @@
         --nav-bg: rgba(11, 8, 41, 0.65);
         --nav-border: rgba(255, 255, 255, 0.1);
         --mega-menu-bg: rgba(11, 8, 41, 0.95);
-        --card-bg: rgba(0, 255, 255, 0.02);
-        --card-border: rgba(0, 255, 255, 0.2);
+
+        /* Card Variables (Dark Mode) */
+        --card-bg: rgba(11, 8, 41, 0.3);
+        --card-border: rgba(255, 255, 255, 0.1);
+        --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+        --card-gradient: linear-gradient(
+          to top,
+          #0b0829 0%,
+          rgba(11, 8, 41, 0.8) 40%,
+          rgba(11, 8, 41, 0) 100%
+        );
+
         --accent-gold: #c5a059;
 
-        /* Gradients for Dark Mode - Seamless flow */
-        /* Hero: Fade from dark top to solid dark bottom */
+        /* Page Gradients */
         --hero-gradient: linear-gradient(
           to bottom,
           rgba(11, 8, 41, 0.7) 0%,
@@ -78,14 +98,12 @@
           rgba(11, 8, 41, 0.8) 90%,
           #0b0829 100%
         );
-        /* Gallery: Dark Blue -> Slightly lighter/Purple tint -> Dark Blue */
         --gallery-bg: linear-gradient(
           to bottom,
           #0b0829 0%,
           #1a1450 50%,
           #0b0829 100%
         );
-        /* Concept: Dark Blue -> Transparent -> Dark Blue */
         --concept-gradient: linear-gradient(
           to bottom,
           #0b0829 0%,
@@ -100,6 +118,9 @@
         --glass-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
         --video-filter: brightness(0.8) contrast(1.1);
         --dropdown-bg: rgba(11, 8, 41, 0.9);
+
+        --about-overlay: rgba(11, 8, 41, 0.6);
+        --stat-border: rgba(255, 255, 255, 0.1);
       }
 
       body {
@@ -112,6 +133,17 @@
         transition:
           background-color 0.5s ease,
           color 0.5s ease;
+      }
+
+      /* --- Page Switcher Classes --- */
+      .page-section {
+        display: block;
+        opacity: 1;
+        transition: opacity 0.5s ease;
+      }
+      .page-section.hidden {
+        display: none;
+        opacity: 0;
       }
 
       /* --- Tesla-Style Liquid Navbar --- */
@@ -129,8 +161,6 @@
         transition:
           transform 0.4s ease-in-out,
           background-color 0.3s;
-
-        /* Liquid Glass Effect */
         background: var(--nav-bg);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
@@ -138,7 +168,6 @@
         box-shadow: var(--glass-shadow);
       }
 
-      /* Hide Navbar on Scroll Down */
       .tesla-nav.nav-hidden {
         transform: translateY(-100%);
       }
@@ -177,13 +206,13 @@
       .nav-item:hover {
         background-color: rgba(128, 128, 128, 0.1);
         border-radius: 4px;
-        height: 40px; /* Tesla hover style isn't full height */
+        height: 40px;
       }
 
-      /* --- Mega Menu (Full Width Dropdown) --- */
+      /* --- Mega Menu --- */
       .mega-menu-container {
         position: fixed;
-        top: 60px; /* Just below navbar */
+        top: 60px;
         left: 0;
         width: 100%;
         height: 0;
@@ -200,10 +229,9 @@
         z-index: 999;
       }
 
-      /* Show menu when hovering parent */
       .nav-item.has-menu:hover .mega-menu-container,
       .mega-menu-container:hover {
-        height: 350px; /* Expand height */
+        height: 350px;
         opacity: 1;
       }
 
@@ -239,11 +267,9 @@
         list-style: none;
         padding: 0;
       }
-
       .mega-col li {
         margin-bottom: 12px;
       }
-
       .mega-col a {
         font-size: 14px;
         font-weight: 500;
@@ -251,13 +277,11 @@
         text-decoration: none;
         transition: color 0.2s;
       }
-
       .mega-col a:hover {
         color: var(--accent-gold);
         text-decoration: underline;
       }
 
-      /* Nav Right Icons */
       .nav-right {
         display: flex;
         align-items: center;
@@ -311,13 +335,12 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: var(--hero-gradient); /* Uses the new full page gradient */
+        background: var(--hero-gradient);
         z-index: 1;
         pointer-events: none;
         transition: background 0.5s ease;
       }
 
-      /* Title Animation */
       .hero-content-wrapper {
         position: relative;
         z-index: 10;
@@ -332,7 +355,6 @@
         text-transform: uppercase;
         letter-spacing: -2px;
         color: var(--text-color);
-        /* Soft Shadow for readability */
         text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         display: flex;
         flex-direction: column;
@@ -344,7 +366,6 @@
         overflow: hidden;
         margin-bottom: 5px;
       }
-
       .title-word {
         display: inline-block;
         transform: translateY(120%);
@@ -379,7 +400,6 @@
         }
       }
 
-      /* --- Bottom Info & Side --- */
       .side-number {
         position: absolute;
         right: 5%;
@@ -439,7 +459,6 @@
         transition: color 0.5s;
       }
 
-      /* --- Divider --- */
       .year-divider {
         position: relative;
         text-align: center;
@@ -475,8 +494,8 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        perspective: 2500px;
-        background: var(--gallery-bg); /* Full seamless gradient */
+        perspective: 3000px; /* Enhanced depth for wider cylinder */
+        background: var(--gallery-bg);
         transition: background 0.5s ease;
       }
 
@@ -507,12 +526,12 @@
         left: 0;
         width: 100%;
         height: 100%;
-        border-radius: 0px; /* Sharp edges */
+        border-radius: 4px;
         background: var(--card-bg);
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
         border: 1px solid var(--card-border);
-        box-shadow: var(--glass-shadow);
+        box-shadow: var(--card-shadow);
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
@@ -524,6 +543,19 @@
         overflow: hidden;
       }
 
+      .glass-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--card-gradient);
+        z-index: -1;
+        pointer-events: none;
+        transition: background 0.5s ease;
+      }
+
       .card-img {
         position: absolute;
         top: 0;
@@ -532,7 +564,7 @@
         height: 100%;
         object-fit: cover;
         z-index: -2;
-        opacity: 0.85;
+        opacity: 0.9;
         transition:
           opacity 0.3s,
           transform 0.5s;
@@ -546,7 +578,7 @@
       }
       .glass-card.active {
         border-color: var(--accent-gold);
-        box-shadow: 0 0 40px rgba(197, 160, 89, 0.3);
+        box-shadow: 0 0 50px rgba(197, 160, 89, 0.4);
       }
 
       .card-title {
@@ -555,8 +587,13 @@
         text-transform: uppercase;
         letter-spacing: 1px;
         margin-bottom: 10px;
-        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
-        color: white;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        color: #1a1a1a;
+        transition: color 0.5s;
+      }
+
+      [data-theme="dark"] .card-title {
+        color: #ffffff;
       }
 
       .cylinder-controls {
@@ -617,7 +654,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: var(--concept-gradient); /* Uses new smooth gradient */
+        background: var(--concept-gradient);
         z-index: 1;
         pointer-events: none;
         transition: background 0.5s;
@@ -636,6 +673,235 @@
         position: absolute;
         background-color: var(--blueprint-color);
         opacity: var(--blueprint-opacity);
+      }
+
+      /* --- About Section (Video Background) --- */
+      .about-section-container {
+        position: relative;
+        width: 100%;
+        background-color: var(--bg-color);
+        transition: background 0.5s;
+      }
+
+      .about-hero {
+        position: relative;
+        height: 90vh;
+        width: 100%;
+        /* Replaced Image with Video Container Styles */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .about-bg-video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
+        filter: var(--video-filter);
+      }
+
+      .about-hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          transparent 0%,
+          var(--bg-color) 100%
+        );
+        z-index: 1;
+      }
+
+      .about-hero-content {
+        position: relative;
+        z-index: 10;
+        text-align: center;
+        width: 100%;
+      }
+
+      .about-main-title {
+        font-size: 70px;
+        font-weight: 300;
+        text-transform: uppercase;
+        letter-spacing: 10px;
+        color: #ffffff;
+        text-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+        margin-bottom: 20px;
+      }
+
+      .about-main-title span {
+        display: block;
+        font-weight: 800;
+        letter-spacing: 2px;
+      }
+
+      .scroll-down-btn {
+        margin-top: 40px;
+        color: white;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        transition: transform 0.3s;
+      }
+      .scroll-down-btn:hover {
+        transform: translateY(5px);
+      }
+
+      .about-grid-wrapper {
+        position: relative;
+        margin-top: -150px;
+        z-index: 20;
+        padding: 0 5%;
+      }
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+
+      .feature-card {
+        background: var(--card-bg);
+        backdrop-filter: blur(30px);
+        -webkit-backdrop-filter: blur(30px);
+        border: 1px solid var(--card-border);
+        padding: 40px 30px;
+        border-radius: 4px;
+        box-shadow: var(--glass-shadow);
+        transition:
+          transform 0.4s,
+          border-color 0.4s;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 300px;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-10px);
+        border-color: var(--accent-gold);
+      }
+
+      .feature-title {
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: var(--text-color);
+        margin-bottom: 10px;
+      }
+
+      .feature-desc {
+        font-size: 12px;
+        color: var(--text-muted);
+        line-height: 1.6;
+      }
+
+      .learn-more-link {
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: var(--accent-gold);
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-top: 20px;
+        cursor: pointer;
+      }
+
+      /* Stats Row */
+      .stats-row {
+        display: flex;
+        justify-content: space-around;
+        padding: 100px 10%;
+        text-align: center;
+        border-bottom: 1px solid var(--stat-border);
+      }
+
+      .stat-item h3 {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: var(--text-muted);
+        margin-bottom: 10px;
+      }
+
+      .stat-number {
+        font-size: 50px;
+        font-weight: 300;
+        color: var(--text-color);
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+      }
+
+      /* Split Section */
+      .split-section {
+        display: flex;
+        min-height: 700px;
+        background-color: var(--bg-color);
+      }
+
+      .split-text {
+        flex: 1;
+        padding: 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .split-image-container {
+        flex: 1;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .split-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: var(--video-filter);
+      }
+
+      .split-tag {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: var(--text-muted);
+        margin-bottom: 20px;
+      }
+
+      .split-title {
+        font-size: 40px;
+        font-weight: 300;
+        text-transform: uppercase;
+        margin-bottom: 30px;
+        line-height: 1.2;
+        color: var(--text-color);
+      }
+
+      .split-title span {
+        font-weight: 700;
+        display: block;
+      }
+
+      .split-desc {
+        font-size: 13px;
+        line-height: 1.8;
+        color: var(--text-muted);
+        max-width: 450px;
+        margin-bottom: 40px;
       }
 
       /* Sound Indicator */
@@ -664,7 +930,6 @@
         transform: translateY(0);
       }
 
-      /* Footer */
       footer {
         background-color: var(--bg-color);
         border-top: 1px solid var(--card-border);
@@ -681,6 +946,16 @@
         transition: background-color 0.5s;
       }
 
+      .social-icons i {
+        margin: 0 10px;
+        cursor: pointer;
+        transition: color 0.3s;
+        color: var(--text-muted);
+      }
+      .social-icons i:hover {
+        color: var(--text-color);
+      }
+
       @media (max-width: 1024px) {
         .nav-center {
           display: none;
@@ -692,24 +967,38 @@
           width: 260px;
           height: 400px;
         }
+        .about-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .split-section {
+          flex-direction: column;
+        }
+        .about-main-title {
+          font-size: 40px;
+        }
+      }
+      @media (max-width: 640px) {
+        .about-grid {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
   <body>
-    <!-- Sound Indicator -->
     <div id="sound-hint" class="sound-indicator visible">
       <i class="fas fa-volume-up mr-2"></i> Tap anywhere for sound
     </div>
 
     <!-- Tesla Style Liquid Navbar with Mega Menu -->
     <nav class="tesla-nav" id="navbar">
-      <div class="nav-logo">SkyPioneers</div>
+      <div class="nav-logo" onclick="switchPage('home')">SkyPioneers</div>
 
       <div class="nav-center hidden lg:flex">
-        <!-- Mega Menu Trigger -->
+        <!-- Home Link -->
+        <div class="nav-item" onclick="switchPage('home')">Home</div>
+
         <div class="nav-item has-menu">
           Projects
-          <!-- Liquid Mega Menu -->
           <div class="mega-menu-container">
             <div class="mega-content">
               <div class="mega-col">
@@ -764,120 +1053,302 @@
           </div>
         </div>
 
+        <!-- About Link triggers Page Switch -->
+        <div class="nav-item" onclick="switchPage('about')">About</div>
         <div class="nav-item">Vision</div>
-        <div class="nav-item">Sustainability</div>
         <div class="nav-item">Investors</div>
-        <div class="nav-item">About</div>
+        <div class="nav-item">Contact</div>
       </div>
 
       <div class="nav-right">
-        <!-- Theme Toggle -->
         <div class="theme-toggle" onclick="toggleTheme()" title="Switch Theme">
           <i class="fas fa-moon" id="theme-icon"></i>
         </div>
-        <div class="nav-item hidden lg:flex">Contact</div>
+        <div class="nav-item hidden lg:flex">Login</div>
         <div class="nav-item lg:hidden"><i class="fas fa-bars"></i></div>
       </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="hero-section">
-      <video
-        id="hero-video"
-        class="hero-bg-video"
-        autoplay
-        loop
-        muted
-        playsinline
-        poster="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2000&auto=format&fit=crop"
-      >
-        <source
-          src="From KlickPin CF Pin on Quick Saves.mp4"
-          type="video/mp4"
-        />
-      </video>
-      <div class="hero-overlay"></div>
+    <!-- HOME PAGE VIEW WRAPPER -->
+    <div id="home-page" class="page-section">
+      <!-- Hero Section -->
+      <header class="hero-section">
+        <video
+          id="hero-video"
+          class="hero-bg-video"
+          autoplay
+          loop
+          muted
+          playsinline
+          poster="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2000&auto=format&fit=crop"
+        >
+          <source
+            src="From KlickPin CF Pin on Quick Saves.mp4"
+            type="video/mp4"
+          />
+        </video>
+        <div class="hero-overlay"></div>
 
-      <!-- Animated Title -->
-      <div class="hero-content-wrapper">
-        <h1 class="main-title">
-          <span class="title-line">
-            <span class="title-word delay-1">SKY</span>
-            <span class="title-word delay-2">PIONEERS</span>
-          </span>
-          <span class="title-line">
-            <span class="title-word delay-3">Real Estate</span>
-          </span>
-        </h1>
-      </div>
-    </header>
-
-    <!-- Gallery Section -->
-    <section class="gallery-section">
-      <h2 class="gallery-title">Our Portfolio</h2>
-      <div class="cylinder-track" id="cylinder-track"></div>
-      <div class="cylinder-controls">
-        <div class="control-btn" onclick="rotateCylinder(1)">
-          <i class="fas fa-chevron-left"></i>
+        <div class="hero-content-wrapper">
+          <h1 class="main-title">
+            <span class="title-line">
+              <span class="title-word delay-1">SKY</span>
+              <span class="title-word delay-2">PIONEERS</span>
+            </span>
+            <span class="title-line">
+              <span class="title-word delay-3">Real Estate</span>
+            </span>
+          </h1>
         </div>
-        <div class="control-btn" onclick="rotateCylinder(-1)">
-          <i class="fas fa-chevron-right"></i>
-        </div>
-      </div>
-    </section>
+      </header>
 
-    <!-- Concept Section -->
-    <section class="concept-section">
-      <video
-        id="concept-video"
-        class="concept-bg-video"
-        autoplay
-        loop
-        muted
-        playsinline
-        poster="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=2000&auto=format&fit=crop"
-      >
-        <source
-          src="From KlickPin CF Пин от пользователя Parallel Dimensions Lab на доске Facades _ Архитектурные макеты Архитектурные модели Архитектура фасадов.mp4"
-          type="video/mp4"
-        />
-      </video>
-      <div class="concept-overlay"></div>
-      <div class="blueprint-lines">
-        <!-- Decorative Lines -->
-        <div
-          class="tech-line"
-          style="width: 1px; height: 100%; left: 20%; top: 0"
-        ></div>
-        <div
-          class="tech-line"
-          style="width: 1px; height: 100%; left: 80%; top: 0"
-        ></div>
-        <div
-          class="tech-line"
-          style="width: 1px; height: 60%; left: 50%; top: 20%"
-        ></div>
-        <div
-          class="tech-line"
-          style="width: 100%; height: 1px; left: 0; top: 30%"
-        ></div>
-        <div
-          class="tech-line"
-          style="width: 100%; height: 1px; left: 0; top: 70%"
-        ></div>
-        <div
-          style="
-            position: absolute;
-            left: 50%;
-            top: 40%;
-            width: 8px;
-            height: 8px;
-            background: var(--accent-gold);
-            border-radius: 50%;
-          "
-        ></div>
+      <!-- Divider -->
+      <div class="year-divider">
+        <span class="year-text">EST. 2024</span>
       </div>
-    </section>
+
+      <!-- Gallery Section -->
+      <section class="gallery-section">
+        <h2 class="gallery-title">Portfolio</h2>
+        <div class="cylinder-track" id="cylinder-track"></div>
+        <div class="cylinder-controls">
+          <div class="control-btn" onclick="rotateCylinder(1)">
+            <i class="fas fa-chevron-left"></i>
+          </div>
+          <div class="control-btn" onclick="rotateCylinder(-1)">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+        </div>
+      </section>
+
+      <!-- Concept Section -->
+      <section class="concept-section">
+        <video
+          id="concept-video"
+          class="concept-bg-video"
+          autoplay
+          loop
+          muted
+          playsinline
+          poster="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=2000&auto=format&fit=crop"
+        >
+          <source
+            src="From KlickPin CF Пин от пользователя Parallel Dimensions Lab на доске Facades _ Архитектурные макеты Архитектурные модели Архитектура фасадов.mp4"
+            type="video/mp4"
+          />
+        </video>
+        <div class="concept-overlay"></div>
+        <div class="blueprint-lines">
+          <div
+            class="tech-line"
+            style="width: 1px; height: 100%; left: 20%; top: 0"
+          ></div>
+          <div
+            class="tech-line"
+            style="width: 1px; height: 100%; left: 80%; top: 0"
+          ></div>
+          <div
+            class="tech-line"
+            style="width: 1px; height: 60%; left: 50%; top: 20%"
+          ></div>
+          <div
+            class="tech-line"
+            style="width: 100%; height: 1px; left: 0; top: 30%"
+          ></div>
+          <div
+            class="tech-line"
+            style="width: 100%; height: 1px; left: 0; top: 70%"
+          ></div>
+          <div
+            style="
+              position: absolute;
+              left: 50%;
+              top: 40%;
+              width: 8px;
+              height: 8px;
+              background: var(--accent-gold);
+              border-radius: 50%;
+            "
+          ></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ABOUT PAGE VIEW WRAPPER -->
+    <div id="about-page" class="page-section hidden">
+      <section class="about-section-container">
+        <!-- About Hero with VIDEO -->
+        <div class="about-hero">
+          <video
+            id="about-video"
+            class="about-bg-video"
+            autoplay
+            loop
+            muted
+            playsinline
+          >
+            <source
+              src="From KlickPin CF Pin on Quick Saves.mp4"
+              type="video/mp4"
+            />
+          </video>
+          <div class="about-hero-overlay"></div>
+          <div class="about-hero-content">
+            <h2 class="about-main-title">Design<br /><span>& Freedom</span></h2>
+            <p style="color: white; letter-spacing: 2px; font-size: 14px">
+              Explore Architectural Freedom by Embracing Uniqueness
+            </p>
+            <div class="scroll-down-btn">
+              <i
+                class="fas fa-arrow-down"
+                style="
+                  border: 1px solid white;
+                  border-radius: 50%;
+                  padding: 10px;
+                "
+              ></i>
+              Learn More
+            </div>
+          </div>
+        </div>
+
+        <!-- Glass Cards Grid -->
+        <div class="about-grid-wrapper">
+          <div class="about-grid">
+            <div class="feature-card">
+              <div>
+                <h3 class="feature-title">Innovation</h3>
+                <p class="feature-desc">
+                  Explore the creativity of independent architects from around
+                  the globe.
+                </p>
+              </div>
+              <div class="learn-more-link">
+                <i class="fas fa-arrow-right"></i> Learn More
+              </div>
+            </div>
+            <div class="feature-card">
+              <div>
+                <h3 class="feature-title">Uniqueness</h3>
+                <p class="feature-desc">
+                  Discover the charm of unique spaces that stand out
+                  effortlessly.
+                </p>
+              </div>
+              <div class="learn-more-link">
+                <i class="fas fa-arrow-right"></i> Learn More
+              </div>
+            </div>
+            <div class="feature-card">
+              <div>
+                <h3 class="feature-title">Quality</h3>
+                <p class="feature-desc">
+                  Experience unparalleled craftsmanship and attention to detail.
+                </p>
+              </div>
+              <div class="learn-more-link">
+                <i class="fas fa-arrow-right"></i> Learn More
+              </div>
+            </div>
+            <div class="feature-card">
+              <div>
+                <h3 class="feature-title">Sustainability</h3>
+                <p class="feature-desc">
+                  Embrace eco-conscious design choices without compromising
+                  style.
+                </p>
+              </div>
+              <div class="learn-more-link">
+                <i class="fas fa-arrow-right"></i> Learn More
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats Row -->
+        <div class="stats-row" id="stats-section">
+          <div class="stat-item">
+            <h3>Architects</h3>
+            <div class="stat-number">
+              <span class="counter" data-target="150">0</span>+
+            </div>
+          </div>
+          <div class="stat-item">
+            <h3>Clients</h3>
+            <div class="stat-number">
+              <span class="counter" data-target="500">0</span>+
+            </div>
+          </div>
+          <div class="stat-item">
+            <h3>Masterpieces</h3>
+            <div class="stat-number">
+              <span class="counter" data-target="20">0</span>K+
+            </div>
+          </div>
+          <div class="stat-item">
+            <h3>Awards</h3>
+            <div class="stat-number">
+              <span class="counter" data-target="50">0</span>+
+            </div>
+          </div>
+        </div>
+
+        <!-- Split Section 1 -->
+        <div class="split-section">
+          <div class="split-text">
+            <span class="split-tag">About Us</span>
+            <h2 class="split-title">
+              Where Architecture<br /><span>Meets Freedom</span>
+            </h2>
+            <p class="split-desc">
+              We believe that space should be an expression of individuality. We
+              encourage creativity and originality in every structure we offer,
+              presenting buildings with exclusive designs that inspire
+              confidence and self-expression.
+            </p>
+            <div
+              class="learn-more-link"
+              style="color: var(--text-color); font-weight: 700"
+            >
+              <i class="fas fa-arrow-right"></i> Our Vision
+            </div>
+          </div>
+          <div class="split-image-container">
+            <img
+              src="https://images.unsplash.com/photo-1506158669146-619067262a00?q=80&w=2000&auto=format&fit=crop"
+              class="split-img"
+            />
+          </div>
+        </div>
+
+        <!-- Split Section 2 -->
+        <div class="split-section" style="flex-direction: row-reverse">
+          <div class="split-text" style="background-color: var(--card-bg)">
+            <span class="split-tag">Our Advantages</span>
+            <div style="margin-bottom: 40px">
+              <h3 class="feature-title">Independent Vision</h3>
+              <p class="feature-desc">
+                Our platform celebrates the ingenuity of independent architects,
+                offering a diverse range of forward-thinking designs.
+              </p>
+            </div>
+            <div>
+              <h3 class="feature-title">Exclusive & Unique</h3>
+              <p class="feature-desc">
+                Indulge in curated collections showcasing exclusive,
+                one-of-a-kind spaces, each with its own story and charm.
+              </p>
+            </div>
+          </div>
+          <div class="split-image-container">
+            <img
+              src="https://images.unsplash.com/photo-1622372738946-e2807de1d5dc?q=80&w=2000&auto=format&fit=crop"
+              class="split-img"
+            />
+          </div>
+        </div>
+      </section>
+    </div>
 
     <!-- Footer -->
     <footer>
@@ -890,6 +1361,23 @@
     </footer>
 
     <script>
+      // --- Page Switching Logic ---
+      function switchPage(pageId) {
+        const homePage = document.getElementById("home-page");
+        const aboutPage = document.getElementById("about-page");
+
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: "smooth" });
+
+        if (pageId === "home") {
+          aboutPage.classList.add("hidden");
+          homePage.classList.remove("hidden");
+        } else if (pageId === "about") {
+          homePage.classList.add("hidden");
+          aboutPage.classList.remove("hidden");
+        }
+      }
+
       // --- Navbar Hide on Scroll ---
       let lastScrollTop = 0;
       const navbar = document.getElementById("navbar");
@@ -897,12 +1385,9 @@
       window.addEventListener("scroll", function () {
         let scrollTop =
           window.pageYOffset || document.documentElement.scrollTop;
-
         if (scrollTop > lastScrollTop && scrollTop > 100) {
-          // Scrolling Down -> Hide
           navbar.classList.add("nav-hidden");
         } else {
-          // Scrolling Up -> Show
           navbar.classList.remove("nav-hidden");
         }
         lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
@@ -924,25 +1409,20 @@
           themeIcon.classList.add("fa-moon");
         }
 
-        // --- CRITICAL VIDEO FIX ---
         const videos = document.querySelectorAll("video");
         videos.forEach((v) => {
-          if (!v.paused) return; // If playing, do nothing
-
-          // If paused (unintentionally), try to resume
+          if (!v.paused) return;
           const playPromise = v.play();
           if (playPromise !== undefined) {
             playPromise.catch((error) => {
-              console.log(
-                "Playback prevented usually due to lack of interaction first.",
-              );
+              console.log("Video auto-replay handled.");
             });
           }
         });
       }
 
-      // --- Gallery Logic (Cylinder) ---
-      const galleryItems = [
+      // --- Expanded Gallery (20 Items) ---
+      const baseItems = [
         {
           img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=800&auto=format&fit=crop",
           title: "Aerial View",
@@ -985,10 +1465,12 @@
         },
       ];
 
+      const galleryItems = [...baseItems, ...baseItems];
+
       const track = document.getElementById("cylinder-track");
       let selectedIndex = 0;
       const cellCount = galleryItems.length;
-      const cellWidth = 300;
+      const cellWidth = 320;
       const gap = 30;
       const radius = Math.round(
         (cellWidth + gap) / (2 * Math.tan(Math.PI / cellCount)),
@@ -1005,7 +1487,7 @@
           card.innerHTML = `
                     <img src="${item.img}" class="card-img" alt="${item.title}">
                     <div class="relative z-10 w-full">
-                        <div class="card-title">${item.title}</div>
+                        <div class="card-title">${item.title} ${i + 1}</div>
                         <div style="width: 30px; height: 2px; background: var(--accent-gold); box-shadow: 0 0 5px rgba(197, 160, 89, 0.5);"></div>
                     </div>
                 `;
@@ -1039,7 +1521,7 @@
             card.style.opacity = "1";
           } else {
             card.classList.remove("active");
-            card.style.opacity = "0.5";
+            card.style.opacity = "0.6";
           }
         });
       }
@@ -1073,6 +1555,48 @@
       }
       document.addEventListener("click", enableAudio);
       document.addEventListener("touchstart", enableAudio);
+
+      // --- Stats Counter Animation ---
+      const statsSection = document.getElementById("stats-section");
+      const counters = document.querySelectorAll(".counter");
+      let hasCounted = false;
+
+      const startCounters = () => {
+        const speed = 50;
+
+        counters.forEach((counter) => {
+          const updateCount = () => {
+            const target = +counter.getAttribute("data-target");
+            const count = +counter.innerText;
+            const inc = target / speed;
+
+            if (count < target) {
+              counter.innerText = Math.ceil(count + inc);
+              setTimeout(updateCount, 30);
+            } else {
+              counter.innerText = target;
+            }
+          };
+          updateCount();
+        });
+      };
+
+      const statsObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && !hasCounted) {
+              startCounters();
+              hasCounted = true;
+              statsObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.5 },
+      );
+
+      if (statsSection) {
+        statsObserver.observe(statsSection);
+      }
     </script>
   </body>
 </html>
