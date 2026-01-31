@@ -1211,17 +1211,208 @@
         transform: translateY(0);
       }
 
+      /* --- Contact Page Styles (Updated to Theme) --- */
+      .contact-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding-top: 120px;
+        padding-bottom: 60px;
+        position: relative;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        min-height: calc(100vh - 100px);
+      }
+
+      .contact-header-box {
+        border: 2px solid #ffffff;
+        padding: 15px 40px;
+        font-size: 32px;
+        color: #ffffff;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        font-weight: 500;
+        margin-bottom: 60px;
+        display: inline-block;
+        /* Using Montserrat as per theme request */
+        font-family: "Montserrat", sans-serif;
+      }
+
+      .contact-subtitle {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 400; /* Regular weight to balance elegance */
+        font-size: 24px;
+        color: var(--accent-gold);
+        margin-bottom: 50px;
+        font-style: italic; /* Keep italic for elegance */
+      }
+
+      .contact-info-row {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 60px;
+        flex-wrap: wrap;
+        gap: 40px;
+      }
+
+      .info-col {
+        flex: 1;
+        min-width: 250px;
+        position: relative;
+        padding: 0 20px;
+      }
+
+      .info-col:not(:last-child)::after {
+        /* Vertical separator for desktop */
+        content: "";
+        position: absolute;
+        right: -20px;
+        top: 20%;
+        height: 60%;
+        width: 1px;
+        background: var(--accent-gold);
+        opacity: 0.5;
+      }
+
+      @media (max-width: 768px) {
+        .info-col:not(:last-child)::after {
+          display: none;
+        }
+      }
+
+      .info-col i {
+        font-size: 24px;
+        color: var(--accent-gold);
+        margin-bottom: 15px;
+        display: block;
+      }
+
+      .info-col h3 {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--accent-gold);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+      }
+
+      .info-col p {
+        font-size: 11px;
+        color: #cccccc;
+        line-height: 1.8;
+      }
+
+      .form-section-title h3 {
+        font-size: 12px;
+        color: #cccccc;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 30px;
+        line-height: 1.6;
+        font-weight: 400;
+      }
+
+      .contact-form-new {
+        width: 100%;
+        max-width: 700px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .new-input {
+        width: 100%;
+        background-color: rgba(
+          255,
+          255,
+          255,
+          0.1
+        ); /* Dark transparent background */
+        border: none;
+        padding: 15px;
+        color: #fff;
+        font-size: 12px;
+        font-family: "Montserrat", sans-serif;
+      }
+
+      .new-input::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      .new-input:focus {
+        outline: 1px solid var(--accent-gold);
+        background-color: rgba(255, 255, 255, 0.15);
+      }
+
+      .send-btn {
+        background-color: var(--accent-gold);
+        color: #000;
+        border: none;
+        padding: 15px 40px;
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        cursor: pointer;
+        align-self: center;
+        margin-top: 10px;
+        transition: transform 0.3s;
+      }
+
+      .send-btn:hover {
+        transform: scale(1.05);
+      }
+
+      .social-row {
+        display: flex;
+        gap: 20px;
+        margin-top: 30px;
+        margin-bottom: 60px;
+      }
+
+      .social-box {
+        width: 40px;
+        height: 40px;
+        background-color: var(--accent-gold);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #000;
+        font-size: 16px;
+        border-radius: 4px; /* Square with slight radius like image */
+        cursor: pointer;
+        transition: opacity 0.3s;
+      }
+
+      .social-box:hover {
+        opacity: 0.8;
+      }
+
+      .map-placeholder {
+        width: 100%;
+        height: 300px;
+        background-image: url("https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1600&auto=format&fit=crop"); /* Dark map style image */
+        background-size: cover;
+        background-position: center;
+        filter: grayscale(100%) invert(100%) contrast(90%);
+        opacity: 0.6;
+        margin-top: 20px;
+      }
+
       footer {
         background-color: var(--bg-color);
         border-top: 1px solid var(--card-border);
-        padding: 40px 0;
+        padding: 40px 5%; /* Adjusted padding for full width content */
         display: flex;
         justify-content: space-between;
         align-items: center;
         font-size: 11px;
         color: var(--text-muted);
-        width: 90%;
-        margin: 0 auto;
+        width: 100%; /* Changed from 90% to 100% */
+        margin: 0; /* Removed margin: 0 auto */
         position: relative;
         z-index: 20;
         transition: background-color 0.5s;
@@ -1350,7 +1541,7 @@
         <div class="nav-item" onclick="switchPage('about')">About</div>
         <div class="nav-item">Vision</div>
         <div class="nav-item">Investors</div>
-        <div class="nav-item">Contact</div>
+        <div class="nav-item" onclick="switchPage('contact')">Contact</div>
       </div>
 
       <div class="nav-right">
@@ -1742,6 +1933,89 @@
       </div>
     </div>
 
+    <!-- CONTACT PAGE VIEW WRAPPER -->
+    <div id="contact-page" class="page-section hidden">
+      <!-- Reusing Explore Background for consistent feel -->
+      <div class="explore-full-bg">
+        <video class="explore-video-bg" autoplay loop muted playsinline>
+          <source
+            src="From KlickPin CF Pin on Quick Saves.mp4"
+            type="video/mp4"
+          />
+        </video>
+        <div
+          class="explore-video-overlay"
+          style="background: rgba(0, 0, 0, 0.85)"
+        ></div>
+      </div>
+
+      <div class="contact-container">
+        <!-- Boxed Header -->
+        <div class="contact-header-box">CONTACT US</div>
+
+        <!-- Subtitle -->
+        <h2 class="contact-subtitle">Get in touch with us !</h2>
+
+        <!-- Info Icons Row -->
+        <div class="contact-info-row">
+          <div class="info-col">
+            <i class="fas fa-mobile-alt"></i>
+            <h3>PHONE</h3>
+            <p>+63 996 632 621<br />+63 7256 222 005</p>
+          </div>
+          <div class="info-col middle-col">
+            <i class="fas fa-map-marker-alt"></i>
+            <h3>ADDRESS</h3>
+            <p>
+              5 Green Field Tandang Sora, Quezon City<br />Metro Manila,
+              Philippines
+            </p>
+          </div>
+          <div class="info-col">
+            <i class="far fa-envelope"></i>
+            <h3>EMAIL</h3>
+            <p>support@kapandesalevents.com<br />sales@kapandesalevents.com</p>
+          </div>
+        </div>
+
+        <!-- Form Section -->
+        <div class="form-section-title">
+          <h3>
+            IF YOU GOT ANY QUESTIONS<br />PLEASE DO NOT HESITATE TO SEND US A
+            MESSAGE.
+          </h3>
+        </div>
+
+        <form class="contact-form-new">
+          <input type="text" class="new-input" placeholder="Your Name" />
+          <input type="email" class="new-input" placeholder="Your Email" />
+          <input type="text" class="new-input" placeholder="Subject" />
+          <textarea
+            class="new-input"
+            rows="5"
+            placeholder="Message"
+            style="resize: none"
+          ></textarea>
+          <button class="send-btn">SEND MESSAGE</button>
+        </form>
+
+        <!-- Socials -->
+        <h2 class="contact-subtitle" style="margin-top: 50px">
+          Connect with us !
+        </h2>
+        <div class="social-row">
+          <div class="social-box"><i class="fab fa-facebook-f"></i></div>
+          <div class="social-box"><i class="fab fa-twitter"></i></div>
+          <div class="social-box"><i class="fab fa-pinterest-p"></i></div>
+          <div class="social-box"><i class="fab fa-instagram"></i></div>
+          <div class="social-box"><i class="fab fa-linkedin-in"></i></div>
+        </div>
+
+        <!-- Map Placeholder -->
+        <div class="map-placeholder"></div>
+      </div>
+    </div>
+
     <!-- ABOUT PAGE VIEW WRAPPER -->
     <div id="about-page" class="page-section hidden">
       <section class="about-section-container">
@@ -1926,10 +2200,21 @@
     <script>
       // --- Page Switching Logic ---
       function switchPage(pageId) {
-        const pages = ["home-page", "about-page", "explore-page"];
+        const pages = [
+          "home-page",
+          "about-page",
+          "explore-page",
+          "contact-page",
+        ];
 
         // Scroll to top
         window.scrollTo({ top: 0, behavior: "smooth" });
+
+        if (pageId === "contact") {
+          document.body.classList.add("contact-active");
+        } else {
+          document.body.classList.remove("contact-active");
+        }
 
         pages.forEach((id) => {
           const el = document.getElementById(id);
