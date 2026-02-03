@@ -6,9 +6,10 @@
     <title>SKYPIONEERS - Real Estate</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -164,6 +165,9 @@
           color 0.5s ease;
       }
 
+      a {
+        cursor: pointer;
+      }
       /* --- Page Switcher Classes --- */
       .page-section {
         display: block;
@@ -234,6 +238,7 @@
 
       .nav-item:hover {
         background-color: rgba(128, 128, 128, 0.1);
+        color: var(--accent-gold);
         border-radius: 4px;
         height: 40px;
       }
@@ -495,7 +500,9 @@
         background: var(--accent-gold);
         color: white;
       }
-
+      .theme-toggle .fa-circle-question {
+        font-size: 22px;
+      }
       /* --- Hero Section --- */
       .hero-section {
         position: relative;
@@ -1379,7 +1386,9 @@
       }
 
       /* --- Contact Page Styles (Updated to Theme) --- */
-      .contact-container {
+      .contact-container,
+      .login-container,
+      .signup-container {
         max-width: 1200px;
         margin: 0 auto;
         padding-top: 120px;
@@ -1393,7 +1402,9 @@
         min-height: calc(100vh - 100px);
       }
 
-      .contact-glass-wrapper {
+      .contact-glass-wrapper,
+      .login-glass-wrapper,
+      .signup-glass-wrapper {
         background: var(--sidebar-gradient);
         backdrop-filter: blur(25px);
         -webkit-backdrop-filter: blur(25px);
@@ -1407,7 +1418,9 @@
         margin-bottom: 40px;
       }
 
-      .contact-title {
+      .contact-title,
+      .login-title,
+      .signup-title {
         font-size: 50px;
         font-weight: 300;
         text-transform: uppercase;
@@ -1417,7 +1430,9 @@
         margin-bottom: 20px;
       }
 
-      .contact-subtitle {
+      .contact-subtitle,
+      .login-subtitle,
+      .signup-subtitle {
         font-family: "Montserrat", sans-serif;
         font-weight: 300;
         font-size: 16px;
@@ -1427,7 +1442,9 @@
         text-transform: uppercase;
       }
 
-      .contact-info-row {
+      .contact-info-row,
+      .login-info-row,
+      .signup-info-row {
         display: flex;
         justify-content: center;
         width: 100%;
@@ -1436,25 +1453,33 @@
         gap: 30px;
       }
 
-      .info-col {
+      .info-col,
+      .login-info-col,
+      .signup-info-col {
         flex: 1;
         min-width: 220px;
         padding: 20px;
         border-radius: 8px;
         transition: background 0.3s;
       }
-      .info-col:hover {
+      .info-col:hover,
+      .login-info-col:hover,
+      .signup-info-col:hover {
         background: rgba(255, 255, 255, 0.05);
       }
 
-      .info-col i {
+      .info-col i,
+      .login-info-col i,
+      .signup-info-col i {
         font-size: 24px;
         color: var(--accent-gold);
         margin-bottom: 15px;
         display: block;
       }
 
-      .info-col h3 {
+      .info-col h3,
+      .login-info-col h3,
+      .signup-info-col h3 {
         font-size: 12px;
         font-weight: 700;
         color: var(--text-color);
@@ -1463,13 +1488,17 @@
         margin-bottom: 10px;
       }
 
-      .info-col p {
+      .info-col p,
+      .login-info-col p,
+      .signup-info-col p {
         font-size: 12px;
         color: var(--text-muted);
         line-height: 1.8;
       }
 
-      .contact-form-new {
+      .contact-form-new,
+      .login-form,
+      .signup-form {
         width: 100%;
         max-width: 700px;
         margin: 0 auto;
@@ -1478,7 +1507,9 @@
         gap: 20px;
       }
 
-      .new-input {
+      .new-input,
+      .login-input,
+      .signup-input {
         width: 100%;
         background-color: rgba(255, 255, 255, 0.1);
         border: 1px solid var(--nav-border);
@@ -1490,15 +1521,32 @@
         transition: all 0.3s;
       }
 
-      .new-input::placeholder {
+      .new-input::placeholder,
+      .login-input::placeholder,
+      .signup-input::placeholder {
         color: var(--text-muted);
         opacity: 0.8;
       }
 
-      .new-input:focus {
+      .new-input:focus,
+      .login-input:focus,
+      .signup-input:focus {
         outline: none;
         border-color: var(--accent-gold);
         background-color: rgba(255, 255, 255, 0.2);
+      }
+
+      .login-form a,
+      .signup-form a {
+        color: var(--accent-gold);
+        text-decoration: none;
+        transition: all 0.3s;
+      }
+      .login-form a:hover,
+      .signup-form a:hover {
+        color: var(--accent-gold);
+        text-decoration: underline;
+        transition: all 0.3s;
       }
 
       .send-btn {
@@ -1896,6 +1944,87 @@
           font-size: 36px;
         }
       }
+
+      /* Bottom Bar */
+      .tesla-bottom-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        background-color: var(--bg-color);
+        border-top: 1px solid var(--border-color);
+        padding: 5px 20px;
+        box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .tesla-chat-input {
+        background-color: #f4f4f4;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 500px;
+        max-width: 100%;
+      }
+
+      .tesla-chat-input .chat-icon {
+        color: #5c5e62;
+        font-size: 16px;
+        margin-left: 10px;
+      }
+
+      .tesla-chat-input input {
+        border: none;
+        background: transparent;
+        outline: none;
+        flex-grow: 1;
+        font-size: 14px;
+        color: #171a20;
+        /* padding: 10px 0; */
+      }
+
+      .tesla-chat-input .send-btn {
+        background-color: #e2e2e2;
+        border: none;
+        border-radius: 4px;
+        width: 28px;
+        height: 28px;
+        /* margin-right: 5px; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        padding: 0;
+        margin: 0 5px 0 0;
+        transition: background-color 0.3s;
+      }
+      .tesla-chat-input .send-btn i {
+        color: #171a20;
+        font-size: 16px;
+        transition: color 0.3s;
+      }
+      .tesla-chat-input .send-btn:hover {
+        background-color: #d2d2d2;
+      }
+      .tesla-chat-input .send-btn:hover i {
+        color: #ffffff;
+      }
+
+      @media (max-width: 768px) {
+        .tesla-bottom-bar {
+          padding: 12px;
+          flex-direction: column;
+          gap: 10px;
+        }
+        .tesla-chat-input {
+          width: 100%;
+        }
+      }
     </style>
   </head>
   <body>
@@ -1978,10 +2107,13 @@
       </div>
 
       <div class="nav-right">
+        <div class="theme-toggle" onclick="" title="Help Center">
+          <i class="fa-regular fa-circle-question"></i>
+        </div>
         <div class="theme-toggle" onclick="toggleTheme()" title="Switch Theme">
           <i class="fas fa-moon" id="theme-icon"></i>
         </div>
-        <div class="nav-item hidden lg:flex">Login</div>
+        <div class="nav-item hidden lg:flex" onclick="switchPage('login')">Login</div>
         <div class="nav-item lg:hidden" onclick="toggleMobileMenu()">
           <i class="fas fa-bars"></i>
         </div>
@@ -2845,6 +2977,126 @@
       </section>
     </div>
 
+    <!-- Login Page -->
+    <div id="login-page" class="page-section hidden">
+      <!-- Reusing Explore Background for consistent feel -->
+      <div class="explore-full-bg">
+        <video
+          class="explore-video-bg"
+          autoplay
+          loop
+          muted
+          playsinline
+          webkit-playsinline
+        >
+          <source
+            src="From KlickPin CF Pin on Quick Saves.mp4"
+            type="video/mp4"
+          />
+        </video>
+        <!-- Use blended overlay instead of solid dark -->
+        <div class="explore-video-overlay"></div>
+      </div>
+
+      <div class="login-container">
+        <div class="login-glass-wrapper">
+          <!-- Title -->
+          <h1 class="login-title">Log in</h1>
+          <!-- <h2 class="contact-subtitle">We'd love to hear from you</h2> -->
+
+          <!-- Form Section -->
+          <form class="login-form">
+            <div style="display: flex; flex-direction: column; gap: 20px">
+              <input type="email" class="login-input" placeholder="Email" />
+              <input type="password" class="login-input" placeholder="Password" />
+            </div>
+            <div style="display: flex; gap: 20px">
+              <input
+                type="checkbox"
+                class="login-input"
+                placeholder="Username"
+                style="width: 20px; height: 20px"
+              />
+              <label for="">Remember me</label>
+              <a href="" style="margin-left: auto">Forgot Password?</a>
+            </div>
+            <button class="send-btn">Log in</button>
+            <p>Don't have an account? <a onclick="switchPage('signup')">Sign up</a></p>
+          </form>
+
+          <!-- Socials -->
+          <div class="social-row">
+            <div class="social-box"><i class="fab fa-facebook-f"></i></div>
+            <div class="social-box"><i class="fab fa-twitter"></i></div>
+            <div class="social-box"><i class="fab fa-instagram"></i></div>
+            <div class="social-box"><i class="fab fa-linkedin-in"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Signup Page -->
+    <div id="signup-page" class="page-section hidden">
+      <!-- Reusing Explore Background for consistent feel -->
+      <div class="explore-full-bg">
+        <video
+          class="explore-video-bg"
+          autoplay
+          loop
+          muted
+          playsinline
+          webkit-playsinline
+        >
+          <source
+            src="From KlickPin CF Pin on Quick Saves.mp4"
+            type="video/mp4"
+          />
+        </video>
+        <!-- Use blended overlay instead of solid dark -->
+        <div class="explore-video-overlay"></div>
+      </div>
+
+      <div class="signup-container">
+        <div class="signup-glass-wrapper">
+          <!-- Title -->
+          <h1 class="signup-title">Sign up</h1>
+          <!-- <h2 class="contact-subtitle">We'd love to hear from you</h2> -->
+
+          <!-- Form Section -->
+          <form class="signup-form">
+            <div style="display: flex; flex-direction: column; gap: 20px">
+              <input type="email" class="signup-input" placeholder="Email" />
+              <input type="password" class="signup-input" placeholder="Password" />
+              <input
+                type="password"
+                class="signup-input"
+                placeholder="Confirm Password"
+              />
+            </div>
+            <div style="display: flex; gap: 20px">
+              <!-- <input
+                type="checkbox"
+                class="login-input"
+                placeholder="Username"
+                style="width: 20px; height: 20px"
+              />
+              <label for="">Remember me</label> -->
+            </div>
+            <button class="send-btn">Sign up</button>
+            <p>Already have an account? <a onclick="switchPage('login')">Login</a></p>
+          </form>
+
+          <!-- Socials -->
+          <div class="social-row">
+            <div class="social-box"><i class="fab fa-facebook-f"></i></div>
+            <div class="social-box"><i class="fab fa-twitter"></i></div>
+            <div class="social-box"><i class="fab fa-instagram"></i></div>
+            <div class="social-box"><i class="fab fa-linkedin-in"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Footer -->
     <footer>
       <div>&copy; 2026 SkyPioneers</div>
@@ -2855,6 +3107,22 @@
       </div>
     </footer>
 
+    <div class="tesla-bottom-bar">
+      <div class="tesla-chat-input">
+        <i class="fa-regular fa-comment-dots chat-icon"></i>
+        <input
+          type="text"
+          placeholder='Ask a Question "What&apos;s Dog Mode?"'
+        />
+        <button class="send-btn"><i class="fa-solid fa-arrow-up"></i></button>
+      </div>
+
+      <!-- <a href="#" class="tesla-schedule-btn">
+        <i class="fa-solid fa-car"></i>
+        <span>Schedule a Drive Today</span>
+      </a> -->
+    </div>
+
     <script>
       // --- Page Switching Logic ---
       function switchPage(pageId) {
@@ -2864,6 +3132,8 @@
           "explore-page",
           "blogs-page",
           "contact-page",
+          "login-page",
+          "signup-page",
         ];
 
         // Scroll to top
