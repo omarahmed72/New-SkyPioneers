@@ -2113,7 +2113,9 @@
         <div class="theme-toggle" onclick="toggleTheme()" title="Switch Theme">
           <i class="fas fa-moon" id="theme-icon"></i>
         </div>
-        <div class="nav-item hidden lg:flex" onclick="switchPage('login')">Login</div>
+        <div class="nav-item hidden lg:flex" onclick="switchPage('login')">
+          Login
+        </div>
         <div class="nav-item lg:hidden" onclick="toggleMobileMenu()">
           <i class="fas fa-bars"></i>
         </div>
@@ -2180,7 +2182,15 @@
       >
         Contact
       </div>
-      <div class="mobile-login-btn">Login</div>
+      <div
+        class="mobile-login-btn"
+        onclick="
+          switchPage('login');
+          toggleMobileMenu();
+        "
+      >
+        Login
+      </div>
     </div>
 
     <!-- HOME PAGE VIEW WRAPPER -->
@@ -3008,7 +3018,11 @@
           <form class="login-form">
             <div style="display: flex; flex-direction: column; gap: 20px">
               <input type="email" class="login-input" placeholder="Email" />
-              <input type="password" class="login-input" placeholder="Password" />
+              <input
+                type="password"
+                class="login-input"
+                placeholder="Password"
+              />
             </div>
             <div style="display: flex; gap: 20px">
               <input
@@ -3021,7 +3035,10 @@
               <a href="" style="margin-left: auto">Forgot Password?</a>
             </div>
             <button class="send-btn">Log in</button>
-            <p>Don't have an account? <a onclick="switchPage('signup')">Sign up</a></p>
+            <p>
+              Don't have an account?
+              <a onclick="switchPage('signup')">Sign up</a>
+            </p>
           </form>
 
           <!-- Socials -->
@@ -3034,7 +3051,7 @@
         </div>
       </div>
     </div>
-    
+
     <!-- Signup Page -->
     <div id="signup-page" class="page-section hidden">
       <!-- Reusing Explore Background for consistent feel -->
@@ -3066,7 +3083,11 @@
           <form class="signup-form">
             <div style="display: flex; flex-direction: column; gap: 20px">
               <input type="email" class="signup-input" placeholder="Email" />
-              <input type="password" class="signup-input" placeholder="Password" />
+              <input
+                type="password"
+                class="signup-input"
+                placeholder="Password"
+              />
               <input
                 type="password"
                 class="signup-input"
@@ -3083,7 +3104,10 @@
               <label for="">Remember me</label> -->
             </div>
             <button class="send-btn">Sign up</button>
-            <p>Already have an account? <a onclick="switchPage('login')">Login</a></p>
+            <p>
+              Already have an account?
+              <a onclick="switchPage('login')">Login</a>
+            </p>
           </form>
 
           <!-- Socials -->
