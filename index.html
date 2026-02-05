@@ -84,6 +84,34 @@
         --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
 
         --stat-border: rgba(0, 0, 0, 0.1);
+
+        /* Dubizzle Style Pills */
+        --pill-bg: rgba(255, 255, 255, 0.5);
+        --pill-border: rgba(0, 0, 0, 0.1);
+        --pill-active-bg: #171a20;
+        --pill-active-text: #ffffff;
+
+        /* Custom Dropdown Gradient (Light) */
+        --dropdown-gradient: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.9) 0%,
+          rgba(255, 255, 255, 0.6) 100%
+        );
+
+        --accent-gold: #c5a059;
+        --video-filter: brightness(1.05) contrast(1.02);
+        --mega-menu-bg: rgba(255, 255, 255, 0.9);
+        --stat-border: rgba(0, 0, 0, 0.1);
+
+        --input-bg: rgba(255, 255, 255, 0.5);
+        --input-text: #171a20;
+        --tab-inactive: rgba(0, 0, 0, 0.05);
+
+        /* Dubizzle Style Pills */
+        --pill-bg: rgba(255, 255, 255, 0.5);
+        --pill-border: rgba(0, 0, 0, 0.1);
+        --pill-active-bg: #171a20;
+        --pill-active-text: #ffffff;
       }
 
       [data-theme="dark"] {
@@ -151,6 +179,33 @@
         --video-filter: brightness(0.8) contrast(1.1);
 
         --stat-border: rgba(255, 255, 255, 0.1);
+
+        /* Dubizzle Style Pills Dark */
+        --pill-bg: rgba(255, 255, 255, 0.1);
+        --pill-border: rgba(255, 255, 255, 0.2);
+        --pill-active-bg: #ffffff;
+        --pill-active-text: #0b0829;
+
+        /* Custom Dropdown Gradient (Dark) */
+        --dropdown-gradient: linear-gradient(
+          135deg,
+          rgba(20, 20, 60, 0.95) 0%,
+          rgba(11, 8, 41, 0.8) 100%
+        );
+
+        --video-filter: brightness(0.7) contrast(1.1);
+        --mega-menu-bg: rgba(11, 8, 41, 0.95);
+        --stat-border: rgba(255, 255, 255, 0.1);
+
+        --input-bg: rgba(255, 255, 255, 0.05);
+        --input-text: #ffffff;
+        --tab-inactive: rgba(255, 255, 255, 0.1);
+
+        /* Dubizzle Style Pills Dark */
+        --pill-bg: rgba(255, 255, 255, 0.1);
+        --pill-border: rgba(255, 255, 255, 0.2);
+        --pill-active-bg: #ffffff;
+        --pill-active-text: #0b0829;
       }
 
       body {
@@ -177,6 +232,92 @@
       .page-section.hidden {
         display: none;
         opacity: 0;
+      }
+
+      /* --- Glass Panel Class (Shared) --- */
+      .glass-panel {
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        border-radius: 12px;
+        box-shadow: var(--glass-shadow);
+        transition:
+          transform 0.3s,
+          border-color 0.3s;
+      }
+      .glass-panel:hover {
+        border-color: var(--accent-gold);
+      }
+
+      /* --- Custom Liquid Dropdown CSS --- */
+      .custom-select-wrapper {
+        position: relative;
+        user-select: none;
+        width: 35%;
+      }
+      .custom-select-trigger {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px;
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--input-text);
+        background: var(--input-bg);
+        border: 1px solid var(--nav-border);
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s;
+        height: 100%;
+      }
+      .custom-select-trigger:hover {
+        border-color: var(--accent-gold);
+      }
+      .custom-options {
+        position: absolute;
+        top: 110%;
+        left: 0;
+        right: 0;
+        background: var(--dropdown-gradient);
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        border: 1px solid var(--glass-border);
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        z-index: 50;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        overflow: hidden;
+      }
+      .custom-select-wrapper.open .custom-options {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+      .custom-option {
+        padding: 12px 15px;
+        font-size: 13px;
+        color: var(--text-color);
+        cursor: pointer;
+        transition: 0.2s;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+      }
+      .custom-option:last-child {
+        border-bottom: none;
+      }
+      .custom-option:hover {
+        background-color: var(--accent-gold);
+        color: white;
+      }
+      .custom-option.selected {
+        font-weight: 700;
+        color: var(--accent-gold);
+      }
+      .custom-option.selected:hover {
+        color: white;
       }
 
       /* --- Tesla-Style Liquid Navbar --- */
@@ -1650,6 +1791,265 @@
         pointer-events: none; /* Allow clicking through to map if needed, or remove to make it a label */
       }
 
+      /* --- CALCULATOR Page Specifics --- */
+      .calc-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        justify-content: center;
+      }
+      .calc-container {
+        padding: 40px;
+        border-radius: 12px;
+      }
+      .calc-title {
+        font-size: 40px;
+        font-weight: 300;
+        text-transform: uppercase;
+        letter-spacing: 5px;
+        text-align: center;
+        margin-bottom: 40px;
+        color: var(--text-color);
+        margin-top: 40px;
+      }
+      .calc-tabs {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 30px;
+        border-bottom: 1px solid var(--nav-border);
+        padding-bottom: 20px;
+      }
+      .calc-tab {
+        padding: 10px 20px;
+        background: transparent;
+        border: none;
+        color: var(--text-muted);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: 0.3s;
+        border-radius: 4px;
+      }
+      @media (max-width: 768px) {
+        .calc-tab {
+          padding: 5px;
+          font-size: 12px;
+        }
+      }
+      .calc-tab.active {
+        background: var(--accent-gold);
+        color: white;
+      }
+      .calc-tab:hover:not(.active) {
+        background: rgba(0, 0, 0, 0.05);
+        color: var(--text-color);
+      }
+      .calc-form-group {
+        margin-bottom: 20px;
+      }
+      .calc-label {
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--text-color);
+        display: block;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+      }
+      .calc-input,
+      .calc-select {
+        width: 100%;
+        padding: 15px;
+        border-radius: 4px;
+        border: 1px solid var(--nav-border);
+        background: var(--input-bg);
+        color: var(--input-text);
+        font-size: 14px;
+        outline: none;
+        transition: 0.3s;
+      }
+      .calc-input:focus,
+      .calc-select:focus {
+        border-color: var(--accent-gold);
+      }
+      .calc-btn {
+        width: 100%;
+        padding: 15px;
+        background: var(--accent-gold);
+        color: white;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        border-radius: 4px;
+        transition: 0.3s;
+        margin-top: 20px;
+      }
+      .calc-btn:hover {
+        background: #b08d4e;
+        transform: translateY(-2px);
+      }
+      .calc-result-box {
+        padding: 40px;
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        height: 100%;
+      }
+      .result-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+      }
+      .result-value {
+        font-size: 50px;
+        font-weight: 300;
+        color: var(--accent-gold);
+        margin-bottom: 30px;
+      }
+      .result-detail-row {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--nav-border);
+        padding: 15px 0;
+        font-size: 13px;
+        color: var(--text-color);
+      }
+
+      /* --- SELL UNIT Page Specifics (Dubizzle Style) --- */
+      .sell-wrapper {
+        max-width: 900px;
+        margin: 0 auto;
+        text-align: left;
+        padding-bottom: 60px;
+      }
+      .sell-section-title {
+        font-size: 16px;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--nav-border);
+        color: var(--text-color);
+        margin-top: 30px;
+        letter-spacing: 1px;
+      }
+      .sell-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+      .full-span {
+        grid-column: span 2;
+      }
+
+      /* Pills Style */
+      .pills-group {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .pill-option {
+        padding: 10px 20px;
+        border: 1px solid var(--pill-border);
+        background: var(--pill-bg);
+        border-radius: 50px;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-color);
+        transition: all 0.2s;
+        user-select: none;
+      }
+      .pill-option:hover {
+        border-color: var(--accent-gold);
+      }
+      .pill-option input {
+        display: none;
+      }
+      .pill-option.active {
+        background: var(--pill-active-bg);
+        color: var(--pill-active-text);
+        border-color: var(--pill-active-bg);
+      }
+
+      .file-upload-box {
+        border: 2px dashed var(--nav-border);
+        padding: 50px;
+        text-align: center;
+        cursor: pointer;
+        transition: 0.3s;
+        background: rgba(0, 0, 0, 0.02);
+        border-radius: 8px;
+        color: var(--text-muted);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .file-upload-box:hover {
+        border-color: var(--accent-gold);
+        color: var(--accent-gold);
+        background: rgba(197, 160, 89, 0.05);
+      }
+
+      #preview-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 15px;
+        margin-top: 20px;
+      }
+      .preview-img-wrapper {
+        position: relative;
+        border-radius: 8px;
+        overflow: hidden;
+        height: 100px;
+        border: 1px solid var(--nav-border);
+      }
+      .preview-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .remove-img-btn {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+        border-radius: 50%;
+        width: 22px;
+        height: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        cursor: pointer;
+      }
+      .remove-img-btn:hover {
+        background: #e74c3c;
+      }
+
+      .submit-btn {
+        background: var(--accent-gold);
+        color: white;
+        padding: 15px;
+        width: 100%;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        transition: 0.3s;
+      }
+      .submit-btn:hover {
+        background: #b08d4e;
+        transform: translateY(-2px);
+      }
+
       /* --- CAROUSEL --- */
 
       .carousel {
@@ -2101,7 +2501,10 @@
 
         <!-- About Link triggers Page Switch -->
         <div class="nav-item" onclick="switchPage('about')">About</div>
-        <div class="nav-item">Vision</div>
+        <div class="nav-item" onclick="switchPage('sell')">Sell Unit</div>
+        <div class="nav-item" onclick="switchPage('calculator')">
+          Calculator
+        </div>
         <div class="nav-item" onclick="switchPage('blogs')">Blogs</div>
         <div class="nav-item" onclick="switchPage('contact')">Contact</div>
       </div>
@@ -2163,7 +2566,24 @@
       >
         About
       </div>
-      <div class="mobile-nav-link">Vision</div>
+      <div
+        class="mobile-nav-link"
+        onclick="
+          switchPage('sell');
+          toggleMobileMenu();
+        "
+      >
+        Sell Unit
+      </div>
+      <div
+        class="mobile-nav-link"
+        onclick="
+          switchPage('calculator');
+          toggleMobileMenu();
+        "
+      >
+        Calculator
+      </div>
       <div
         class="mobile-nav-link"
         onclick="
@@ -2815,6 +3235,452 @@
       </div>
     </div>
 
+    <!-- === CALCULATOR PAGE === -->
+    <div
+      id="calculator-page"
+      class="page-section hidden"
+      style="padding-top: 100px"
+    >
+      <div class="explore-full-bg">
+        <video
+          class="explore-video-bg"
+          autoplay
+          loop
+          muted
+          playsinline
+          webkit-playsinline
+        >
+          <source
+            src="From KlickPin CF Pin on Quick Saves.mp4"
+            type="video/mp4"
+          />
+        </video>
+        <!-- Use blended overlay instead of solid dark -->
+        <div class="explore-video-overlay"></div>
+      </div>
+      <div class="calc-container" style="position: relative">
+        <h1 class="calc-title">Budget Calculator</h1>
+        <div class="calc-wrapper">
+          <div class="calc-container glass-panel">
+            <!-- Calc Tabs -->
+            <div class="calc-tabs">
+              <button
+                class="calc-tab active"
+                id="tab-installment"
+                onclick="switchCalcMode('installment')"
+              >
+                Installment
+              </button>
+              <button
+                class="calc-tab"
+                id="tab-affordability"
+                onclick="switchCalcMode('affordability')"
+              >
+                Affordability
+              </button>
+            </div>
+
+            <!-- Installment Form (Default) -->
+            <div id="form-installment" class="block">
+              <div class="calc-form-group">
+                <label class="calc-label">Total Unit Price (EGP)</label>
+                <input
+                  type="number"
+                  class="calc-input"
+                  id="calc-price"
+                  value="5000000"
+                />
+              </div>
+              <div class="calc-form-group">
+                <label class="calc-label">Down Payment (%)</label>
+                <input
+                  type="number"
+                  class="calc-input"
+                  id="calc-dp-percent"
+                  value="10"
+                />
+              </div>
+              <div class="calc-form-group">
+                <label class="calc-label">Years</label>
+                <input
+                  type="number"
+                  class="calc-input"
+                  id="calc-years"
+                  value="8"
+                />
+              </div>
+              <div class="calc-form-group">
+                <label class="calc-label"
+                  >Annual Interest Rate (%)
+                  <small
+                    style="opacity: 0.7; font-weight: 400; text-transform: none"
+                    >(0 for Developer)</small
+                  ></label
+                >
+                <input
+                  type="number"
+                  class="calc-input"
+                  id="calc-interest"
+                  value="0"
+                />
+              </div>
+            </div>
+
+            <!-- Affordability Form (Hidden) -->
+            <div id="form-affordability" class="hidden">
+              <div class="calc-form-group">
+                <label class="calc-label">Income (EGP)</label>
+                <div class="flex gap-2">
+                  <input
+                    type="number"
+                    class="calc-input flex-1"
+                    id="aff-income"
+                    value="50000"
+                    placeholder="Amount"
+                  />
+                  <!-- Custom Select -->
+                  <div class="custom-select-wrapper" id="freq-wrapper">
+                    <div
+                      class="custom-select-trigger glass-panel"
+                      onclick="toggleCustomSelect()"
+                    >
+                      <span id="selected-freq-text">Monthly</span>
+                      <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="custom-options glass-panel" id="freq-options">
+                      <div
+                        class="custom-option selected"
+                        onclick="selectFreq(1, 'Monthly')"
+                      >
+                        Monthly
+                      </div>
+                      <div
+                        class="custom-option"
+                        onclick="selectFreq(3, 'Quarterly')"
+                      >
+                        Quarterly
+                      </div>
+                      <div
+                        class="custom-option"
+                        onclick="selectFreq(6, 'Semi-Annual')"
+                      >
+                        Semi-Annual
+                      </div>
+                      <div
+                        class="custom-option"
+                        onclick="selectFreq(12, 'Annual')"
+                      >
+                        Annual
+                      </div>
+                    </div>
+                    <input type="hidden" id="aff-income-freq" value="1" />
+                  </div>
+                </div>
+              </div>
+              <div class="calc-form-group">
+                <label class="calc-label">Available Down Payment (EGP)</label>
+                <input
+                  type="number"
+                  class="calc-input"
+                  id="aff-dp"
+                  value="500000"
+                />
+              </div>
+              <div class="calc-form-group">
+                <label class="calc-label">Loan Duration (Years)</label>
+                <input
+                  type="number"
+                  class="calc-input"
+                  id="aff-years"
+                  value="20"
+                />
+              </div>
+              <div class="calc-form-group">
+                <label class="calc-label">Annual Interest Rate (%)</label>
+                <input
+                  type="number"
+                  class="calc-input"
+                  id="aff-interest"
+                  value="10"
+                />
+              </div>
+            </div>
+
+            <button class="calc-btn" onclick="calculate()">Calculate</button>
+          </div>
+
+          <div class="calc-result-box glass-panel">
+            <div id="res-installment-view" class="block">
+              <div class="result-label">Monthly Installment</div>
+              <div class="result-value" id="monthly-result">0 EGP</div>
+              <div style="width: 100%; margin-top: 20px">
+                <div class="result-detail-row">
+                  <span>Total Price</span><span id="res-total">0 EGP</span>
+                </div>
+                <div class="result-detail-row">
+                  <span>Down Payment</span><span id="res-dp">0 EGP</span>
+                </div>
+                <div class="result-detail-row">
+                  <span>Loan/Remainder</span><span id="res-loan">0 EGP</span>
+                </div>
+              </div>
+            </div>
+
+            <div id="res-affordability-view" class="hidden">
+              <div class="result-label">Max Property Price</div>
+              <div class="result-value" id="aff-max-price">0 EGP</div>
+              <div style="width: 100%; margin-top: 20px">
+                <div class="result-detail-row">
+                  <span>Max Monthly Payment</span
+                  ><span id="aff-monthly">0 EGP</span>
+                </div>
+                <div class="result-detail-row">
+                  <span>Max Loan Amount</span><span id="aff-loan">0 EGP</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- === SELL UNIT PAGE (Dubizzle Style) === -->
+    <div id="sell-page" class="page-section hidden" style="padding-top: 100px">
+      <div class="explore-full-bg">
+        <video
+          class="explore-video-bg"
+          autoplay
+          loop
+          muted
+          playsinline
+          webkit-playsinline
+        >
+          <source
+            src="From KlickPin CF Pin on Quick Saves.mp4"
+            type="video/mp4"
+          />
+        </video>
+        <!-- Use blended overlay instead of solid dark -->
+        <div class="explore-video-overlay"></div>
+      </div>
+      <div class="sell-hero-content" style="position: relative">
+        <h1 class="calc-title">Sell Your Unit</h1>
+
+        <div class="sell-wrapper">
+          <form
+            class="glass-panel"
+            id="sell-form"
+            style="
+              padding: 40px;
+              text-align: left;
+              max-width: 900px;
+              margin: 0 auto;
+            "
+          >
+            <!-- Section 1: Property Details -->
+            <div class="sell-section-title">Property Details</div>
+            <div class="sell-grid">
+              <div class="full-span">
+                <label class="calc-label">Property Title</label>
+                <input
+                  type="text"
+                  class="calc-input"
+                  placeholder="e.g. Luxury Apartment in New Cairo"
+                />
+              </div>
+
+              <div>
+                <label class="calc-label">Category</label>
+                <select class="calc-select">
+                  <option>Apartment</option>
+                  <option>Villa</option>
+                  <option>Townhouse</option>
+                  <option>Chalet</option>
+                  <option>Commercial</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="calc-label">Price (EGP)</label>
+                <input
+                  type="number"
+                  class="calc-input"
+                  placeholder="Total Price"
+                />
+              </div>
+
+              <div>
+                <label class="calc-label">Area (sqm)</label>
+                <input
+                  type="number"
+                  class="calc-input"
+                  placeholder="e.g. 150"
+                />
+              </div>
+
+              <!-- Pills for Rooms -->
+              <div class="full-span">
+                <label class="calc-label">Bedrooms</label>
+                <div class="pills-group" id="bedrooms-pills">
+                  <div
+                    class="pill-option"
+                    onclick="selectPill(this, 'bedrooms')"
+                  >
+                    Studio
+                  </div>
+                  <div
+                    class="pill-option"
+                    onclick="selectPill(this, 'bedrooms')"
+                  >
+                    1
+                  </div>
+                  <div
+                    class="pill-option"
+                    onclick="selectPill(this, 'bedrooms')"
+                  >
+                    2
+                  </div>
+                  <div
+                    class="pill-option"
+                    onclick="selectPill(this, 'bedrooms')"
+                  >
+                    3
+                  </div>
+                  <div
+                    class="pill-option"
+                    onclick="selectPill(this, 'bedrooms')"
+                  >
+                    4+
+                  </div>
+                </div>
+              </div>
+
+              <div class="full-span">
+                <label class="calc-label">Bathrooms</label>
+                <div class="pills-group" id="bathrooms-pills">
+                  <div
+                    class="pill-option"
+                    onclick="selectPill(this, 'bathrooms')"
+                  >
+                    1
+                  </div>
+                  <div
+                    class="pill-option"
+                    onclick="selectPill(this, 'bathrooms')"
+                  >
+                    2
+                  </div>
+                  <div
+                    class="pill-option"
+                    onclick="selectPill(this, 'bathrooms')"
+                  >
+                    3
+                  </div>
+                  <div
+                    class="pill-option"
+                    onclick="selectPill(this, 'bathrooms')"
+                  >
+                    4+
+                  </div>
+                </div>
+              </div>
+
+              <div class="full-span">
+                <label class="calc-label">Description</label>
+                <textarea
+                  class="calc-input"
+                  rows="4"
+                  placeholder="Describe the key features of your property..."
+                ></textarea>
+              </div>
+            </div>
+
+            <!-- Section 2: Photos -->
+            <div class="sell-section-title">Photos</div>
+            <div
+              class="file-upload-box"
+              onclick="document.getElementById('unit-photos').click()"
+            >
+              <i
+                class="fas fa-camera"
+                style="font-size: 32px; margin-bottom: 10px"
+              ></i>
+              <p style="font-size: 14px; font-weight: 600">
+                Click to upload photos
+              </p>
+              <p style="font-size: 11px; opacity: 0.7">
+                Supported formats: JPG, PNG
+              </p>
+              <input
+                type="file"
+                id="unit-photos"
+                multiple
+                accept="image/*"
+                class="hidden"
+                onchange="handleFileSelect(event)"
+              />
+            </div>
+            <div id="preview-container"></div>
+
+            <!-- Section 3: Location -->
+            <div class="sell-section-title">Location</div>
+            <div class="sell-grid">
+              <div>
+                <label class="calc-label">Governorate</label>
+                <select class="calc-select">
+                  <option>Cairo</option>
+                  <option>Giza</option>
+                  <option>Alexandria</option>
+                </select>
+              </div>
+              <div>
+                <label class="calc-label">City / Area</label>
+                <select class="calc-select">
+                  <option>New Cairo</option>
+                  <option>Maadi</option>
+                  <option>Nasr City</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Section 4: Contact Info -->
+            <div class="sell-section-title">Your Details</div>
+            <div class="sell-grid">
+              <div>
+                <label class="calc-label">Name</label>
+                <input type="text" class="calc-input" placeholder="Your Name" />
+              </div>
+              <div>
+                <label class="calc-label">Phone Number</label>
+                <input
+                  type="text"
+                  class="calc-input"
+                  placeholder="01xxxxxxxxx"
+                />
+              </div>
+              <div>
+                <label class="calc-label">Email</label>
+                <input
+                  type="email"
+                  class="calc-input"
+                  placeholder="you@example.com"
+                />
+              </div>
+            </div>
+
+            <button
+              type="button"
+              class="submit-btn"
+              style="margin-top: 40px"
+              onclick="submitListing()"
+            >
+              Post Ad Now
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
     <!-- ABOUT PAGE VIEW WRAPPER -->
     <div id="about-page" class="page-section hidden">
       <section class="about-section-container">
@@ -3136,7 +4002,7 @@
         <i class="fa-regular fa-comment-dots chat-icon"></i>
         <input
           type="text"
-          placeholder='Ask a Question "What&apos;s Dog Mode?"'
+          placeholder='Ask a Question'
         />
         <button class="send-btn"><i class="fa-solid fa-arrow-up"></i></button>
       </div>
@@ -3156,6 +4022,8 @@
           "explore-page",
           "blogs-page",
           "contact-page",
+          "calculator-page",
+          "sell-page",
           "login-page",
           "signup-page",
         ];
@@ -3442,6 +4310,251 @@
       if (statsSection) {
         statsObserver.observe(statsSection);
       }
+
+      async function safePlay(video) {
+        try {
+          await video.play();
+        } catch (e) {
+          console.log("Auto-play prevented");
+        }
+      }
+
+      /* --- Custom Select Logic --- */
+      function toggleCustomSelect() {
+        document.getElementById("freq-wrapper").classList.toggle("open");
+      }
+
+      function selectFreq(value, text) {
+        document.getElementById("aff-income-freq").value = value;
+        document.getElementById("selected-freq-text").innerText = text;
+        document.getElementById("freq-wrapper").classList.remove("open");
+
+        const options = document.querySelectorAll(".custom-option");
+        options.forEach((opt) => opt.classList.remove("selected"));
+        event.target.classList.add("selected");
+      }
+
+      document.addEventListener("click", function (e) {
+        const wrapper = document.getElementById("freq-wrapper");
+        if (wrapper && !wrapper.contains(e.target)) {
+          wrapper.classList.remove("open");
+        }
+      });
+
+      /* --- Calculator Logic --- */
+      let currentCalcMode = "installment";
+
+      function switchCalcMode(mode) {
+        currentCalcMode = mode;
+        document
+          .getElementById("tab-installment")
+          .classList.toggle("active", mode === "installment");
+        document
+          .getElementById("tab-affordability")
+          .classList.toggle("active", mode === "affordability");
+
+        if (mode === "installment") {
+          document.getElementById("form-installment").style.display = "block";
+          document.getElementById("form-affordability").style.display = "none";
+          document.getElementById("res-installment-view").style.display =
+            "block";
+          document.getElementById("res-affordability-view").style.display =
+            "none";
+        } else {
+          document.getElementById("form-installment").style.display = "none";
+          document.getElementById("form-affordability").style.display = "block";
+          document.getElementById("res-installment-view").style.display =
+            "none";
+          document.getElementById("res-affordability-view").style.display =
+            "block";
+        }
+      }
+
+      function calculate() {
+        const fmt = (num) => Math.round(num).toLocaleString("en-US") + " EGP";
+
+        if (currentCalcMode === "installment") {
+          const price =
+            parseFloat(document.getElementById("calc-price").value) || 0;
+          const dpPercent =
+            parseFloat(document.getElementById("calc-dp-percent").value) || 0;
+          const years =
+            parseFloat(document.getElementById("calc-years").value) || 1;
+          const interestRate =
+            parseFloat(document.getElementById("calc-interest").value) || 0;
+
+          const dpAmount = price * (dpPercent / 100);
+          const loanAmount = price - dpAmount;
+          const n = years * 12;
+          let monthlyPayment = 0;
+
+          if (interestRate === 0) {
+            monthlyPayment = n > 0 ? loanAmount / n : 0;
+          } else {
+            const r = interestRate / 100 / 12;
+            monthlyPayment =
+              loanAmount *
+              ((r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1));
+          }
+
+          document.getElementById("monthly-result").innerText =
+            fmt(monthlyPayment);
+          document.getElementById("res-total").innerText = fmt(price);
+          document.getElementById("res-dp").innerText = fmt(dpAmount);
+          document.getElementById("res-loan").innerText = fmt(loanAmount);
+        } else {
+          const rawIncome =
+            parseFloat(document.getElementById("aff-income").value) || 0;
+          const incomeFreq =
+            parseFloat(document.getElementById("aff-income-freq").value) || 1;
+          const monthlyIncome = rawIncome / incomeFreq;
+          const cashDp =
+            parseFloat(document.getElementById("aff-dp").value) || 0;
+          const years =
+            parseFloat(document.getElementById("aff-years").value) || 1;
+          const interestRate =
+            parseFloat(document.getElementById("aff-interest").value) || 0;
+
+          const maxMonthlyPayment = monthlyIncome * 0.4;
+          const n = years * 12;
+          let maxLoan = 0;
+
+          if (interestRate === 0) {
+            maxLoan = maxMonthlyPayment * n;
+          } else {
+            const r = interestRate / 100 / 12;
+            maxLoan =
+              maxMonthlyPayment *
+              ((Math.pow(1 + r, n) - 1) / (r * Math.pow(1 + r, n)));
+          }
+
+          const maxPrice = maxLoan + cashDp;
+          document.getElementById("aff-max-price").innerText = fmt(maxPrice);
+          document.getElementById("aff-monthly").innerText =
+            fmt(maxMonthlyPayment);
+          document.getElementById("aff-loan").innerText = fmt(maxLoan);
+        }
+      }
+
+      function calculateInstallment() {
+        calculate();
+      }
+
+      /* --- Sell Page Logic --- */
+      function selectPill(element, groupName) {
+        const group = document.getElementById(groupName + "-pills");
+        const pills = group.getElementsByClassName("pill-option");
+
+        // Remove active from all in group
+        for (let pill of pills) {
+          pill.classList.remove("active");
+        }
+        // Add active to clicked
+        element.classList.add("active");
+      }
+
+      function handleFileSelect(event) {
+        const files = event.target.files;
+        const previewContainer = document.getElementById("preview-container");
+
+        for (let i = 0; i < files.length; i++) {
+          const file = files[i];
+          if (!file.type.startsWith("image/")) continue;
+
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            const div = document.createElement("div");
+            div.className = "preview-img-wrapper";
+            div.innerHTML = `
+                        <img src="${e.target.result}" class="preview-img">
+                        <div class="remove-img-btn" onclick="this.parentElement.remove()">X</div>
+                    `;
+            previewContainer.appendChild(div);
+          };
+          reader.readAsDataURL(file);
+        }
+      }
+
+      function submitListing() {
+        const btn = document.querySelector("#sell-form .submit-btn");
+        const originalText = btn.innerText;
+        btn.innerText = "Processing...";
+        btn.disabled = true;
+
+        setTimeout(() => {
+          btn.innerText = originalText;
+          btn.disabled = false;
+          showToast("Ad submitted successfully! Under review.", "success");
+
+          // Admin notification simulation
+          setTimeout(() => {
+            showToast("New Ad Submission Received (Admin)", "admin");
+            console.log(
+              "New Ad Data:",
+              "User: Ahmed, Type: Apartment, Price: 4.5M",
+            );
+          }, 2000);
+
+          document.getElementById("sell-form").reset();
+          document.getElementById("preview-container").innerHTML = "";
+          // Reset pills
+          document
+            .querySelectorAll(".pill-option")
+            .forEach((p) => p.classList.remove("active"));
+        }, 1500);
+      }
+
+      function showToast(message, type = "success") {
+        const toast =
+          type === "admin"
+            ? document.getElementById("admin-toast")
+            : document.getElementById("client-toast");
+        toast.querySelector("span").innerText = message;
+        toast.classList.add("show");
+        setTimeout(() => {
+          toast.classList.remove("show");
+        }, 3000);
+      }
+
+      function rotateCylinder(direction) {
+        selectedIndex += direction;
+        updateCylinder();
+      }
+
+      function updateCylinder() {
+        if (!track) return;
+        const angle = theta * selectedIndex * -1;
+        track.style.transform = `translateZ(${-radius}px) rotateY(${angle}deg)`;
+        const cards = document.querySelectorAll(".gallery-card");
+        const activeIndex =
+          ((selectedIndex % cellCount) + cellCount) % cellCount;
+        cards.forEach((card, i) => {
+          if (i === activeIndex) {
+            card.classList.add("active");
+            card.style.opacity = "1";
+          } else {
+            card.classList.remove("active");
+            card.style.opacity = "0.6";
+          }
+        });
+      }
+      initGallery();
+
+      /* --- Audio Logic --- */
+      function enableAudio() {
+        const videos = document.querySelectorAll("video");
+        videos.forEach((v) => {
+          v.muted = false;
+          v.volume = 0.5;
+          safePlay(v);
+        });
+        const hint = document.getElementById("sound-hint");
+        if (hint) hint.classList.remove("visible");
+        document.removeEventListener("click", enableAudio);
+        document.removeEventListener("touchstart", enableAudio);
+      }
+      document.addEventListener("click", enableAudio);
+      document.addEventListener("touchstart", enableAudio);
     </script>
     <script src="main.js"></script>
   </body>

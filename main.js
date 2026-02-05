@@ -49,3 +49,4 @@ function showSlider(type) {
 
 // Start the initial animation
 resettimeAnimation();
+
