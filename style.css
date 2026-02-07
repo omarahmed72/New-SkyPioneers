@@ -2350,7 +2350,7 @@ a {
 
 @media screen and (max-width: 690px) {
   .tesla-nav {
-    padding-left: 20px !important;
+    padding-left: 20px;
   }
   .item .content {
     top: 40%;
