@@ -200,8 +200,14 @@
   --pill-active-text: #0b0829;
 }
 
+@font-face {
+    font-family: 'Alexandria';
+    src: url('Sky-fonts/ALEXANDRIA-REGULAR.TTF');
+}
+
 body {
-  font-family: "Montserrat", sans-serif;
+    font-family: 'Alexandria', sans-serif;
+  /* font-family: "Montserrat", sans-serif; */
   background-color: var(--bg-color);
   color: var(--text-color);
   margin: 0;
@@ -435,7 +441,7 @@ a {
 
 /* Animation for menu items */
 .mobile-nav-link {
-  font-family: "Montserrat", sans-serif;
+  /* font-family: "Montserrat", sans-serif; */
   font-size: 18px; /* Balanced size */
   font-weight: 600;
   text-transform: uppercase;
@@ -498,7 +504,7 @@ a {
 }
 
 .mobile-nav-sublink {
-  font-family: "Montserrat", sans-serif;
+  /* font-family: "Montserrat", sans-serif; */
   font-size: 13px;
   color: var(--text-muted);
   margin: 8px 0;
@@ -1649,7 +1655,7 @@ a {
 .contact-subtitle,
 .login-subtitle,
 .signup-subtitle {
-  font-family: "Montserrat", sans-serif;
+  /* font-family: "Montserrat", sans-serif; */
   font-weight: 300;
   font-size: 16px;
   letter-spacing: 1px;
@@ -1732,7 +1738,7 @@ a {
   padding: 15px 20px;
   color: var(--text-color);
   font-size: 13px;
-  font-family: "Montserrat", sans-serif;
+  /* font-family: "Montserrat", sans-serif; */
   border-radius: 6px;
   transition: all 0.3s;
 }
