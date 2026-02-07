@@ -319,7 +319,7 @@ a {
 }
 
 /* --- Tesla-Style Liquid Navbar --- */
- {
+.tesla-nav {
   position: fixed;
   top: 0;
   left: 0;
@@ -340,7 +340,7 @@ a {
   box-shadow: var(--glass-shadow);
 }
 
-.nav-hidden {
+.tesla-nav.nav-hidden {
   transform: translateY(-100%);
 }
 
@@ -353,7 +353,7 @@ a {
   z-index: 1001;
   cursor: pointer;
 } */
- .nav-logo img {
+.tesla-nav .nav-logo img {
   width: 153px;
 }
 @media (max-width: 768px) {
@@ -2674,4 +2674,3 @@ footer {
   -webkit-backdrop-filter: blur(30px);
   border: 1px solid var(--card-border);
 }
-
