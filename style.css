@@ -201,12 +201,12 @@
 }
 
 @font-face {
-    font-family: 'Alexandria';
-    src: url('Sky-fonts/ALEXANDRIA-REGULAR.TTF');
+  font-family: "Alexandria";
+  src: url("Sky-fonts/ALEXANDRIA-REGULAR.TTF");
 }
 
 body {
-    font-family: 'Alexandria', sans-serif;
+  font-family: "Alexandria", sans-serif;
   /* font-family: "Montserrat", sans-serif; */
   background-color: var(--bg-color);
   color: var(--text-color);
@@ -344,7 +344,7 @@ a {
   transform: translateY(-100%);
 }
 
-.nav-logo {
+/* .nav-logo {
   font-size: 16px;
   font-weight: 700;
   letter-spacing: 2px;
@@ -352,8 +352,15 @@ a {
   color: var(--text-color);
   z-index: 1001;
   cursor: pointer;
+} */
+.tesla-nav .nav-logo img {
+  width: 153px;
 }
-
+@media (max-width: 768px) {
+  .tesla-nav .nav-logo img {
+    width: 100px;
+  }
+}
 .nav-center {
   display: flex;
   height: 100%;
@@ -2343,7 +2350,7 @@ a {
 
 @media screen and (max-width: 690px) {
   .tesla-nav {
-    padding-left: 50px;
+    padding-left: 10px;
   }
   .item .content {
     top: 40%;
