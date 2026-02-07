@@ -25,12 +25,7 @@
     <nav class="tesla-nav" id="navbar">
       <div class="nav-logo">
         <a href="index.html">
-          <img
-            src="imgs/logo.png"
-            alt="Logo"
-            id="nav-logo"
-            style="width: 153px"
-          />
+          <img src="logo.png" alt="Logo" id="nav-logo" style="width: 153px" />
         </a>
       </div>
 
@@ -239,111 +234,241 @@
       </div>
     </div>
 
-    <!-- HOME PAGE VIEW WRAPPER -->
-    <div id="home-page" class="page-section">
-      <!-- Hero Section -->
-      <header class="hero-section">
+    <!-- === SELL UNIT PAGE (Dubizzle Style) === -->
+    <div id="sell-page" class="page-section" style="padding-top: 100px">
+      <div class="explore-full-bg">
         <video
-          id="hero-video"
-          class="hero-bg-video"
+          class="explore-video-bg"
           autoplay
           loop
           muted
           playsinline
           webkit-playsinline
-          poster="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2000&auto=format&fit=crop"
         >
           <source
             src="From KlickPin CF Pin on Quick Saves.mp4"
             type="video/mp4"
           />
         </video>
-        <div class="hero-overlay"></div>
-
-        <div class="hero-content-wrapper">
-          <h1 class="main-title">
-            <span class="title-line">
-              <span class="title-word delay-1">SKY</span>
-              <span class="title-word delay-2">PIONEERS</span>
-            </span>
-            <span class="title-line">
-              <span class="title-word delay-3">Real Estate</span>
-            </span>
-          </h1>
-        </div>
-      </header>
-
-      <!-- Divider -->
-      <div class="year-divider">
-        <span class="year-text">EST. 2024</span>
+        <!-- Use blended overlay instead of solid dark -->
+        <div class="explore-video-overlay"></div>
       </div>
+      <div class="sell-hero-content" style="position: relative">
+        <h1 class="calc-title">Sell Your Unit</h1>
 
-      <!-- Gallery Section -->
-      <section class="gallery-section">
-        <h2 class="gallery-title">Portfolio</h2>
-        <div class="cylinder-track" id="cylinder-track"></div>
-        <div class="cylinder-controls">
-          <div class="control-btn" onclick="rotateCylinder(1)">
-            <i class="fas fa-chevron-left"></i>
-          </div>
-          <div class="control-btn" onclick="rotateCylinder(-1)">
-            <i class="fas fa-chevron-right"></i>
-          </div>
-        </div>
-      </section>
-
-      <!-- Concept Section -->
-      <section class="concept-section">
-        <video
-          id="concept-video"
-          class="concept-bg-video"
-          autoplay
-          loop
-          muted
-          playsinline
-          webkit-playsinline
-          poster="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=2000&auto=format&fit=crop"
-        >
-          <source
-            src="From KlickPin CF Пин от пользователя Parallel Dimensions Lab на доске Facades _ Архитектурные макеты Архитектурные модели Архитектура фасадов.mp4"
-            type="video/mp4"
-          />
-        </video>
-        <div class="concept-overlay"></div>
-        <div class="blueprint-lines">
-          <div
-            class="tech-line"
-            style="width: 1px; height: 100%; left: 20%; top: 0"
-          ></div>
-          <div
-            class="tech-line"
-            style="width: 1px; height: 100%; left: 80%; top: 0"
-          ></div>
-          <div
-            class="tech-line"
-            style="width: 1px; height: 60%; left: 50%; top: 20%"
-          ></div>
-          <div
-            class="tech-line"
-            style="width: 100%; height: 1px; left: 0; top: 30%"
-          ></div>
-          <div
-            class="tech-line"
-            style="width: 100%; height: 1px; left: 0; top: 70%"
-          ></div>
-          <div
+        <div class="sell-wrapper">
+          <form
+            class="glass-panel"
+            id="sell-form"
             style="
-              position: absolute;
-              left: 50%;
-              top: 40%;
-              width: 8px;
-              height: 8px;
-              background: var(--accent-gold);
-              border-radius: 50%;
+              padding: 40px;
+              text-align: left;
+              max-width: 900px;
+              margin: 0 auto;
             "
-          ></div>
+          >
+            <!-- Section 1: Property Details -->
+            <div class="sell-section-title">Property Details</div>
+            <div class="sell-grid">
+              <div class="full-span">
+                <label class="calc-label">Property Title</label>
+                <input
+                  type="text"
+                  class="calc-input"
+                  placeholder="e.g. Luxury Apartment in New Cairo"
+                />
+              </div>
+
+              <div>
+                <label class="calc-label">Category</label>
+                <select class="calc-select">
+                  <option>Apartment</option>
+                  <option>Villa</option>
+                  <option>Townhouse</option>
+                  <option>Chalet</option>
+                  <option>Commercial</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="calc-label">Price (EGP)</label>
+                <input
+                  type="number"
+                  class="calc-input"
+                  placeholder="Total Price"
+                />
+              </div>
+
+              <div>
+                <label class="calc-label">Area (sqm)</label>
+                <input
+                  type="number"
+                  class="calc-input"
+                  placeholder="e.g. 150"
+                />
+              </div>
+
+              <!-- Pills for Rooms -->
+              <div class="full-span">
+                <label class="calc-label">Bedrooms</label>
+                <div class="pills-group" id="bedrooms-pills">
+                  <div
+                    class="pill-option"
+                    onclick="selectPill(this, 'bedrooms')"
+                  >
+                    Studio
+                  </div>
+                  <div
+                    class="pill-option"
+                    onclick="selectPill(this, 'bedrooms')"
+                  >
+                    1
+                  </div>
+                  <div
+                    class="pill-option"
+                    onclick="selectPill(this, 'bedrooms')"
+                  >
+                    2
+                  </div>
+                  <div
+                    class="pill-option"
+                    onclick="selectPill(this, 'bedrooms')"
+                  >
+                    3
+                  </div>
+                  <div
+                    class="pill-option"
+                    onclick="selectPill(this, 'bedrooms')"
+                  >
+                    4+
+                  </div>
+                </div>
+              </div>
+
+              <div class="full-span">
+                <label class="calc-label">Bathrooms</label>
+                <div class="pills-group" id="bathrooms-pills">
+                  <div
+                    class="pill-option"
+                    onclick="selectPill(this, 'bathrooms')"
+                  >
+                    1
+                  </div>
+                  <div
+                    class="pill-option"
+                    onclick="selectPill(this, 'bathrooms')"
+                  >
+                    2
+                  </div>
+                  <div
+                    class="pill-option"
+                    onclick="selectPill(this, 'bathrooms')"
+                  >
+                    3
+                  </div>
+                  <div
+                    class="pill-option"
+                    onclick="selectPill(this, 'bathrooms')"
+                  >
+                    4+
+                  </div>
+                </div>
+              </div>
+
+              <div class="full-span">
+                <label class="calc-label">Description</label>
+                <textarea
+                  class="calc-input"
+                  rows="4"
+                  placeholder="Describe the key features of your property..."
+                ></textarea>
+              </div>
+            </div>
+
+            <!-- Section 2: Photos -->
+            <div class="sell-section-title">Photos</div>
+            <div
+              class="file-upload-box"
+              onclick="document.getElementById('unit-photos').click()"
+            >
+              <i
+                class="fas fa-camera"
+                style="font-size: 32px; margin-bottom: 10px"
+              ></i>
+              <p style="font-size: 14px; font-weight: 600">
+                Click to upload photos
+              </p>
+              <p style="font-size: 11px; opacity: 0.7">
+                Supported formats: JPG, PNG
+              </p>
+              <input
+                type="file"
+                id="unit-photos"
+                multiple
+                accept="image/*"
+                class="hidden"
+                onchange="handleFileSelect(event)"
+              />
+            </div>
+            <div id="preview-container"></div>
+
+            <!-- Section 3: Location -->
+            <div class="sell-section-title">Location</div>
+            <div class="sell-grid">
+              <div>
+                <label class="calc-label">Governorate</label>
+                <select class="calc-select">
+                  <option>Cairo</option>
+                  <option>Giza</option>
+                  <option>Alexandria</option>
+                </select>
+              </div>
+              <div>
+                <label class="calc-label">City / Area</label>
+                <select class="calc-select">
+                  <option>New Cairo</option>
+                  <option>Maadi</option>
+                  <option>Nasr City</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Section 4: Contact Info -->
+            <div class="sell-section-title">Your Details</div>
+            <div class="sell-grid">
+              <div>
+                <label class="calc-label">Name</label>
+                <input type="text" class="calc-input" placeholder="Your Name" />
+              </div>
+              <div>
+                <label class="calc-label">Phone Number</label>
+                <input
+                  type="text"
+                  class="calc-input"
+                  placeholder="01xxxxxxxxx"
+                />
+              </div>
+              <div>
+                <label class="calc-label">Email</label>
+                <input
+                  type="email"
+                  class="calc-input"
+                  placeholder="you@example.com"
+                />
+              </div>
+            </div>
+
+            <button
+              type="button"
+              class="submit-btn"
+              style="margin-top: 40px"
+              onclick="submitListing()"
+            >
+              Post Ad Now
+            </button>
+          </form>
         </div>
-      </section>
+      </div>
     </div>
 
     <!-- Footer -->

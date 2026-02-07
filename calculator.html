@@ -25,12 +25,7 @@
     <nav class="tesla-nav" id="navbar">
       <div class="nav-logo">
         <a href="index.html">
-          <img
-            src="imgs/logo.png"
-            alt="Logo"
-            id="nav-logo"
-            style="width: 153px"
-          />
+          <img src="imgs/logo.png" alt="Logo" id="nav-logo" style="width: 153px" />
         </a>
       </div>
 
@@ -238,112 +233,209 @@
         <a href="login.html">Login</a>
       </div>
     </div>
-
-    <!-- HOME PAGE VIEW WRAPPER -->
-    <div id="home-page" class="page-section">
-      <!-- Hero Section -->
-      <header class="hero-section">
+    <!-- === CALCULATOR PAGE === -->
+    <div id="calculator-page" class="page-section" style="padding-top: 100px">
+      <div class="explore-full-bg">
         <video
-          id="hero-video"
-          class="hero-bg-video"
+          class="explore-video-bg"
           autoplay
           loop
           muted
           playsinline
           webkit-playsinline
-          poster="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2000&auto=format&fit=crop"
         >
           <source
             src="From KlickPin CF Pin on Quick Saves.mp4"
             type="video/mp4"
           />
         </video>
-        <div class="hero-overlay"></div>
-
-        <div class="hero-content-wrapper">
-          <h1 class="main-title">
-            <span class="title-line">
-              <span class="title-word delay-1">SKY</span>
-              <span class="title-word delay-2">PIONEERS</span>
-            </span>
-            <span class="title-line">
-              <span class="title-word delay-3">Real Estate</span>
-            </span>
-          </h1>
-        </div>
-      </header>
-
-      <!-- Divider -->
-      <div class="year-divider">
-        <span class="year-text">EST. 2024</span>
+        <!-- Use blended overlay instead of solid dark -->
+        <div class="explore-video-overlay"></div>
       </div>
+      <div class="calc-container" style="position: relative">
+        <h1 class="calc-title">Budget Calculator</h1>
+        <div class="calc-wrapper">
+          <div class="calc-container glass-panel">
+            <!-- Calc Tabs -->
+            <div class="calc-tabs">
+              <button
+                class="calc-tab active"
+                id="tab-installment"
+                onclick="switchCalcMode('installment')"
+              >
+                Installment
+              </button>
+              <button
+                class="calc-tab"
+                id="tab-affordability"
+                onclick="switchCalcMode('affordability')"
+              >
+                Affordability
+              </button>
+            </div>
 
-      <!-- Gallery Section -->
-      <section class="gallery-section">
-        <h2 class="gallery-title">Portfolio</h2>
-        <div class="cylinder-track" id="cylinder-track"></div>
-        <div class="cylinder-controls">
-          <div class="control-btn" onclick="rotateCylinder(1)">
-            <i class="fas fa-chevron-left"></i>
+            <!-- Installment Form (Default) -->
+            <div id="form-installment" class="block">
+              <div class="calc-form-group">
+                <label class="calc-label">Total Unit Price (EGP)</label>
+                <input
+                  type="number"
+                  class="calc-input"
+                  id="calc-price"
+                  value="5000000"
+                />
+              </div>
+              <div class="calc-form-group">
+                <label class="calc-label">Down Payment (%)</label>
+                <input
+                  type="number"
+                  class="calc-input"
+                  id="calc-dp-percent"
+                  value="10"
+                />
+              </div>
+              <div class="calc-form-group">
+                <label class="calc-label">Years</label>
+                <input
+                  type="number"
+                  class="calc-input"
+                  id="calc-years"
+                  value="8"
+                />
+              </div>
+              <div class="calc-form-group">
+                <label class="calc-label"
+                  >Annual Interest Rate (%)
+                  <small
+                    style="opacity: 0.7; font-weight: 400; text-transform: none"
+                    >(0 for Developer)</small
+                  ></label
+                >
+                <input
+                  type="number"
+                  class="calc-input"
+                  id="calc-interest"
+                  value="0"
+                />
+              </div>
+            </div>
+
+            <!-- Affordability Form (Hidden) -->
+            <div id="form-affordability" class="hidden">
+              <div class="calc-form-group">
+                <label class="calc-label">Income (EGP)</label>
+                <div class="flex gap-2">
+                  <input
+                    type="number"
+                    class="calc-input flex-1"
+                    id="aff-income"
+                    value="50000"
+                    placeholder="Amount"
+                  />
+                  <!-- Custom Select -->
+                  <div class="custom-select-wrapper" id="freq-wrapper">
+                    <div
+                      class="custom-select-trigger glass-panel"
+                      onclick="toggleCustomSelect()"
+                    >
+                      <span id="selected-freq-text">Monthly</span>
+                      <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="custom-options glass-panel" id="freq-options">
+                      <div
+                        class="custom-option selected"
+                        onclick="selectFreq(1, 'Monthly')"
+                      >
+                        Monthly
+                      </div>
+                      <div
+                        class="custom-option"
+                        onclick="selectFreq(3, 'Quarterly')"
+                      >
+                        Quarterly
+                      </div>
+                      <div
+                        class="custom-option"
+                        onclick="selectFreq(6, 'Semi-Annual')"
+                      >
+                        Semi-Annual
+                      </div>
+                      <div
+                        class="custom-option"
+                        onclick="selectFreq(12, 'Annual')"
+                      >
+                        Annual
+                      </div>
+                    </div>
+                    <input type="hidden" id="aff-income-freq" value="1" />
+                  </div>
+                </div>
+              </div>
+              <div class="calc-form-group">
+                <label class="calc-label">Available Down Payment (EGP)</label>
+                <input
+                  type="number"
+                  class="calc-input"
+                  id="aff-dp"
+                  value="500000"
+                />
+              </div>
+              <div class="calc-form-group">
+                <label class="calc-label">Loan Duration (Years)</label>
+                <input
+                  type="number"
+                  class="calc-input"
+                  id="aff-years"
+                  value="20"
+                />
+              </div>
+              <div class="calc-form-group">
+                <label class="calc-label">Annual Interest Rate (%)</label>
+                <input
+                  type="number"
+                  class="calc-input"
+                  id="aff-interest"
+                  value="10"
+                />
+              </div>
+            </div>
+
+            <button class="calc-btn" onclick="calculate()">Calculate</button>
           </div>
-          <div class="control-btn" onclick="rotateCylinder(-1)">
-            <i class="fas fa-chevron-right"></i>
+
+          <div class="calc-result-box glass-panel">
+            <div id="res-installment-view" class="block">
+              <div class="result-label">Monthly Installment</div>
+              <div class="result-value" id="monthly-result">0 EGP</div>
+              <div style="width: 100%; margin-top: 20px">
+                <div class="result-detail-row">
+                  <span>Total Price</span><span id="res-total">0 EGP</span>
+                </div>
+                <div class="result-detail-row">
+                  <span>Down Payment</span><span id="res-dp">0 EGP</span>
+                </div>
+                <div class="result-detail-row">
+                  <span>Loan/Remainder</span><span id="res-loan">0 EGP</span>
+                </div>
+              </div>
+            </div>
+
+            <div id="res-affordability-view" class="hidden">
+              <div class="result-label">Max Property Price</div>
+              <div class="result-value" id="aff-max-price">0 EGP</div>
+              <div style="width: 100%; margin-top: 20px">
+                <div class="result-detail-row">
+                  <span>Max Monthly Payment</span
+                  ><span id="aff-monthly">0 EGP</span>
+                </div>
+                <div class="result-detail-row">
+                  <span>Max Loan Amount</span><span id="aff-loan">0 EGP</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </section>
-
-      <!-- Concept Section -->
-      <section class="concept-section">
-        <video
-          id="concept-video"
-          class="concept-bg-video"
-          autoplay
-          loop
-          muted
-          playsinline
-          webkit-playsinline
-          poster="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=2000&auto=format&fit=crop"
-        >
-          <source
-            src="From KlickPin CF Пин от пользователя Parallel Dimensions Lab на доске Facades _ Архитектурные макеты Архитектурные модели Архитектура фасадов.mp4"
-            type="video/mp4"
-          />
-        </video>
-        <div class="concept-overlay"></div>
-        <div class="blueprint-lines">
-          <div
-            class="tech-line"
-            style="width: 1px; height: 100%; left: 20%; top: 0"
-          ></div>
-          <div
-            class="tech-line"
-            style="width: 1px; height: 100%; left: 80%; top: 0"
-          ></div>
-          <div
-            class="tech-line"
-            style="width: 1px; height: 60%; left: 50%; top: 20%"
-          ></div>
-          <div
-            class="tech-line"
-            style="width: 100%; height: 1px; left: 0; top: 30%"
-          ></div>
-          <div
-            class="tech-line"
-            style="width: 100%; height: 1px; left: 0; top: 70%"
-          ></div>
-          <div
-            style="
-              position: absolute;
-              left: 50%;
-              top: 40%;
-              width: 8px;
-              height: 8px;
-              background: var(--accent-gold);
-              border-radius: 50%;
-            "
-          ></div>
-        </div>
-      </section>
+      </div>
     </div>
 
     <!-- Footer -->
