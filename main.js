@@ -92,23 +92,39 @@ window.addEventListener("scroll", function () {
 });
 
 // --- Theme Switching & Video Fix ---
-let isDarkMode = false;
+// --- Theme Switching & Video Fix ---
 const themeIcon = document.getElementById("theme-icon");
 const navLogo = document.getElementById("nav-logo");
 
-function toggleTheme() {
-  isDarkMode = !isDarkMode;
+// Initialize from localStorage
+let savedTheme = localStorage.getItem("theme");
+let isDarkMode = savedTheme === "dark";
+
+function applyTheme() {
   if (isDarkMode) {
     document.body.setAttribute("data-theme", "dark");
-    themeIcon.classList.remove("fa-moon");
-    themeIcon.classList.add("fa-sun");
-    navLogo.src = "imgs/logo white.png";
+    if (themeIcon) {
+      themeIcon.classList.remove("fa-moon");
+      themeIcon.classList.add("fa-sun");
+    }
+    if (navLogo) navLogo.src = "imgs/logo white.png";
   } else {
     document.body.removeAttribute("data-theme");
-    themeIcon.classList.remove("fa-sun");
-    themeIcon.classList.add("fa-moon");
-    navLogo.src = "imgs/logo.png";
+    if (themeIcon) {
+      themeIcon.classList.remove("fa-sun");
+      themeIcon.classList.add("fa-moon");
+    }
+    if (navLogo) navLogo.src = "imgs/logo.png";
   }
+}
+
+// Apply immediately on load
+applyTheme();
+
+function toggleTheme() {
+  isDarkMode = !isDarkMode;
+  localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+  applyTheme();
 
   const videos = document.querySelectorAll("video");
   videos.forEach((v) => {
@@ -550,8 +566,6 @@ function enableAudio() {
   document.removeEventListener("touchstart", enableAudio);
 }
 
-
-
 /* --- Blog Logic --- */
 document.addEventListener("click", enableAudio);
 document.addEventListener("touchstart", enableAudio);
@@ -586,7 +600,7 @@ function resettimeAnimation() {
 
 function showSlider(type) {
   let sliderItems = document.querySelectorAll(".carousel .list .item");
-  
+
   if (type === "next") {
     list.appendChild(sliderItems[0]);
     carousel.classList.add("next");

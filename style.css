@@ -981,6 +981,70 @@ a {
   transition: background-color 0.5s;
 }
 
+/* --- Newsletter Section --- */
+.newsletter-section {
+  padding: 60px 20px;
+  text-align: center;
+  background-color: var(--bg-color);
+  transition: background-color 0.5s;
+}
+
+.newsletter-section h1 {
+  font-size: 24px;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  margin-bottom: 10px;
+  color: var(--text-color);
+  transition: color 0.5s;
+}
+
+.newsletter-section p {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 30px;
+  transition: color 0.5s;
+}
+
+.newsletter-section .search-container {
+  max-width: 500px;
+  margin: 0 auto;
+  border: 1px solid var(--accent-gold);
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.newsletter-section .search-container input {
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 15px 20px;
+  width: 70%;
+  color: var(--text-color);
+  transition: color 0.5s;
+}
+
+.newsletter-section button {
+  margin: 1rem;
+  padding: 15px;
+  background: var(--accent-gold);
+  border: none;
+  border-radius: 2rem;
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.newsletter-section button:hover {
+  background: #d4af37;
+}
+
+.newsletter-section input::placeholder {
+  color: var(--text-muted);
+}
+
 .concept-bg-video {
   position: absolute;
   top: 0;
@@ -2674,3 +2738,32 @@ footer {
   -webkit-backdrop-filter: blur(30px);
   border: 1px solid var(--card-border);
 }
+
+/* Services page */
+.services-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+.service-item {
+  display: flex;
+  gap: 20px;
+}
+.service-icon {
+  font-size: 2rem;
+}
+.service-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.service-title {
+  font-size: 1.3rem;
+}
+.service-description {
+  line-height: 1.5;
+  font-size: 13px;
+  margin-left: 1rem;
+  text-align: start;
+}
+
