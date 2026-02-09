@@ -1008,7 +1008,8 @@ a {
 
 .newsletter-section .search-container {
   max-width: 500px;
-  margin: 0 auto;
+  /* margin: 0 auto; */
+  margin: 30px auto;
   border: 1px solid var(--accent-gold);
   border-radius: 50px;
   overflow: hidden;
@@ -1024,8 +1025,9 @@ a {
   transition: color 0.5s;
 }
 
-.newsletter-section button {
-  margin: 1rem;
+.newsletter-section button,
+.newsletter-section a {
+  /* margin: 1rem; */
   padding: 15px;
   background: var(--accent-gold);
   border: none;
@@ -1163,7 +1165,7 @@ a {
 
 .about-grid-wrapper {
   position: relative;
-  margin-top: -150px;
+  /* margin-top: -150px; */
   z-index: 20;
   padding: 0 5%;
 }
@@ -1224,30 +1226,32 @@ a {
 }
 
 /* Stats Row */
-/* .stats-row {
-        display: flex;
-        justify-content: space-around;
-        padding: 100px 10%;
-        text-align: center;
-        border-bottom: 1px solid var(--stat-border);
-      }
+.stats-row {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  padding: 100px 10%;
+  text-align: center;
+  border-bottom: 1px solid var(--stat-border);
+}
 
-      .stat-item h3 {
-        font-size: 12px;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        color: var(--text-muted);
-        margin-bottom: 10px;
-      }
+.stat-item h3 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
 
-      .stat-number {
-        font-size: 50px;
-        font-weight: 300;
-        color: var(--text-color);
-        display: flex;
-        justify-content: center;
-        align-items: baseline;
-      } */
+.stat-number {
+  font-size: 50px;
+  font-weight: 300;
+  color: var(--text-color);
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+*/
 
 /* --- About Page: Power in Numbers --- */
 .power-numbers-section {
@@ -1340,9 +1344,10 @@ a {
 
 /* Split Section */
 .split-section {
+  position: relative;
   display: flex;
   min-height: 700px;
-  background-color: var(--bg-color);
+  /* background-color: var(--bg-color); */
 }
 
 .split-text {
@@ -2766,4 +2771,3 @@ footer {
   margin-left: 1rem;
   text-align: start;
 }
-

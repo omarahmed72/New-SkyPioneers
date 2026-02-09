@@ -242,10 +242,10 @@
     <!-- ABOUT PAGE VIEW WRAPPER -->
     <div id="about-page" class="page-section">
       <section class="about-section-container">
-        <div class="about-hero">
+        <!-- Reusing Explore Background for consistent feel -->
+        <div class="explore-full-bg">
           <video
-            id="about-video"
-            class="about-bg-video"
+            class="explore-video-bg"
             autoplay
             loop
             muted
@@ -254,7 +254,10 @@
           >
             <source src="video sky.mp4" type="video/mp4" />
           </video>
-          <div class="about-hero-overlay"></div>
+          <!-- Use blended overlay instead of solid dark -->
+          <div class="explore-video-overlay"></div>
+        </div>
+        <div class="about-hero">
           <div class="about-hero-content">
             <h2 class="about-main-title">Design<br /><span>& Freedom</span></h2>
             <p style="color: white; letter-spacing: 2px; font-size: 14px">
@@ -326,7 +329,7 @@
           </div>
         </div>
 
-        <!-- <div class="stats-row" id="stats-section">
+        <div class="stats-row" id="stats-section">
           <a
             class="download-btn"
             href="test.pdf"
@@ -370,63 +373,6 @@
               <span class="counter" data-target="50">0</span>+
             </div>
           </div>
-        </div> -->
-
-        <div class="px-[5%] py-[5%]">
-          <!-- Power in Numbers Section (MATCHING REQUESTED IMAGE) -->
-          <section class="power-numbers-section glass-panel" id="power-section">
-            <div class="power-text-col">
-              <h2 class="power-title">Power<br />In Numbers</h2>
-              <p class="power-desc text-lg">
-                To know more about us explore our company profile through
-              </p>
-
-              <!-- [EDIT] استبدل رابط href بالرابط الحقيقي للملف الذي تريد رفعه -->
-              <!-- [EDIT] Replace href with the actual URL of your PDF file -->
-              <a
-                href="test.pdf"
-                download="SkyPioneers_Profile.pdf"
-                class="download-btn"
-              >
-                Download PDF
-              </a>
-            </div>
-
-            <div class="power-grid-col">
-              <!-- Stat Box 1 -->
-              <div class="stat-box">
-                <div class="stat-box-num">
-                  <span class="counter" data-target="104">0</span>
-                </div>
-                <div class="stat-box-label">Development Studies</div>
-              </div>
-              <!-- Stat Box 2 -->
-              <div class="stat-box">
-                <div class="stat-box-num">
-                  <span class="counter" data-target="11">0</span>
-                </div>
-                <div class="stat-box-label">Market Entry Advisory</div>
-              </div>
-              <!-- Stat Box 3 -->
-              <div class="stat-box">
-                <div class="stat-box-num">
-                  <span class="counter" data-target="32">0</span>
-                </div>
-                <div class="stat-box-label">Market Research</div>
-              </div>
-              <!-- Stat Box 4 (Wide) -->
-              <div class="stat-box wide">
-                <div class="stat-box-num">
-                  <span class="counter" data-target="329.1" data-decimal="true"
-                    >0</span
-                  >B
-                </div>
-                <div class="stat-box-label">
-                  Total Of Our Evaluated 1080 Assets
-                </div>
-              </div>
-            </div>
-          </section>
         </div>
 
         <div class="contact-container">
@@ -500,7 +446,7 @@
                 <div class="service-content">
                   <h3 class="service-title">Develpoment and Construction</h3>
                   <p class="service-description">
-                     We offer a comprehensive range of development and
+                    We offer a comprehensive range of development and
                     construction services, including project planning, design,
                     engineering, procurement, construction, and project
                     management.
@@ -547,7 +493,7 @@
         </div>
 
         <div class="split-section" style="flex-direction: row-reverse">
-          <div class="split-text" style="background-color: var(--card-bg)">
+          <div class="split-text">
             <span class="split-tag">Our Advantages</span>
             <div style="margin-bottom: 40px">
               <h3 class="feature-title">Independent Vision</h3>
@@ -566,7 +512,7 @@
           </div>
           <div class="split-image-container">
             <img
-              src="https://images.unsplash.com/photo-1622372738946-e2807de1d5dc?q=80&w=2000&auto=format&fit=crop"
+              src="https://images.unsplash.com/photo-1506158669146-619067262a00?q=80&w=2000&auto=format&fit=crop"
               class="split-img"
             />
           </div>
